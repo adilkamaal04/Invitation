@@ -2,347 +2,446 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#F7F1E3">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tabinda & Adil — Nikah Invitation</title>
 
-<title>Tabinda &amp; Adil — Nikah Invitation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: env(safe-area-inset-top,0px); }
-
 :root {
-    --gold: #C9A24A;        /* Wedding Gold */
-    --gold-deep: #A67C28;   /* Antique Gold - used for readable text/labels */
-    --gold-light: #E8D59B;  /* Champagne Gold - decorative only */
-    --bg: #F7F1E3;          /* Warm Ivory */
-    --card: #FFFDF7;        /* Soft Ivory */
-    --text: #2B261F;        /* Warm Charcoal */
-    --muted: #756D60;       /* Taupe */
-    --border: #C9A24A;
-    padding-top: env(safe-area-inset-top,0px);
-    padding-bottom: env(safe-area-inset-bottom,0px);
+  --pink: #f8e6ec;
+  --pink-dark: #d99caf;
+  --rose: #b96782;
+  --rose-gold: #c47a91;
+  --ink: #49313b;
+  --paper: #fff9fb;
 }
-:root:not([data-theme="light"]){ --bg:#F7F1E3; --card:#FFFDF7; --text:#2B261F; }
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: Georgia, "Times New Roman", serif;
-    overflow-x: hidden;
-}
-button { font: inherit; }
-img { max-width: 100%; display: block; }
-
-/* INTRO — envelope with wax seal */
-#intro {
-    position: fixed; inset: 0; z-index: 9999; overflow: hidden;
-    background: linear-gradient(160deg, var(--bg), var(--gold-light) 130%);
-    transition: opacity .9s ease .5s, visibility .9s ease .5s;
-}
-#intro.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
-.envelope-flap {
-    position: absolute; inset: 0;
-    clip-path: polygon(0 0, 100% 0, 50% 58%);
-    background: linear-gradient(155deg, var(--card), var(--gold-light) 80%);
-    transition: opacity .7s ease, transform .8s ease;
-}
-.fold-line { position: absolute; top: 0; left: 50%; width: 1px; height: 66%; background: linear-gradient(to bottom, rgba(166,124,40,.55), transparent); transform-origin: top center; }
-.fold-line.left { transform: rotate(-35deg); }
-.fold-line.right { transform: rotate(35deg); }
-#intro.opening .envelope-flap { opacity: 0; transform: translateY(-60px); }
-
-.wax-seal {
-    position: absolute; top: 58%; left: 50%; transform: translate(-50%, -50%);
-    width: 150px; height: 150px; z-index: 2;
-    border-radius: 48% 52% 50% 50% / 52% 48% 52% 48%;
-    background: radial-gradient(circle at 35% 30%, var(--gold-light), var(--gold) 55%, var(--gold-deep) 100%);
-    box-shadow: 0 10px 22px rgba(43,38,31,.25), inset 0 2px 5px rgba(255,255,255,.5);
-    border: none; cursor: pointer;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    color: var(--card); font-family: Georgia, serif;
-    transition: transform .6s ease, opacity .6s ease;
-}
-.wax-seal .ws-line1 { font-size: 15px; letter-spacing: 1px; }
-.wax-seal .ws-line2 { font-size: 22px; margin: 2px 0; font-style: italic; }
-.wax-seal .ws-star { font-size: 10px; opacity: .85; }
-.wax-seal:active { transform: translate(-50%, -50%) scale(.94); }
-#intro.opening .wax-seal { transform: translate(-50%, -50%) scale(1.25); opacity: 0; }
-
-.envelope-caption { position: absolute; bottom: 12%; left: 0; right: 0; text-align: center; z-index: 2;
-    font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold-deep);
-    transition: opacity .5s ease; }
-#intro.opening .envelope-caption { opacity: 0; }
-
-/* PARTICLES */
-.particles { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 1; }
-.particle { position: absolute; width: 3px; height: 3px; border-radius: 50%; background: var(--gold-deep); opacity: 0; animation: floatParticle linear infinite; }
-@keyframes floatParticle {
-    0% { transform: translateY(100vh) scale(0); opacity: 0; }
-    15% { opacity: .45; } 85% { opacity: .35; }
-    100% { transform: translateY(-20vh) scale(1); opacity: 0; }
+  background: var(--pink);
+  color: var(--ink);
+  font-family: "Cormorant Garamond", Georgia, serif;
+  text-align: center;
 }
 
-main { position: relative; z-index: 2; }
+button { font: inherit; cursor: pointer; }
 
-/* HERO */
-.hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 70px 20px;
-    background: radial-gradient(circle at center, rgba(166,124,40,.12), transparent 45%); }
-.hero-content { max-width: 700px; }
-.eyebrow { font-size: 11px; letter-spacing: 5px; text-transform: uppercase; color: var(--gold-deep); }
-.hero h1 { margin-top: 28px; font-size: clamp(45px, 12vw, 88px); line-height: .95; font-weight: normal; color: var(--text); }
-.hero h1 span { display: block; font-size: 19px; color: var(--gold-deep); margin: 18px 0; font-style: italic; }
-.hero-date { margin-top: 35px; font-size: 15px; letter-spacing: 4px; color: var(--text); }
-.scroll-indicator { margin-top: 60px; font-size: 10px; letter-spacing: 4px; color: var(--muted); animation: bounce 2s infinite; }
-@keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(10px); } }
-
-/* SECTION */
-.section { position: relative; padding: 100px 20px; max-width: 900px; margin: auto; text-align: center; }
-.section-label { font-size: 10px; letter-spacing: 5px; text-transform: uppercase; color: var(--gold-deep); margin-bottom: 18px; }
-.section-title { font-size: clamp(30px, 7vw, 48px); font-weight: normal; margin-bottom: 30px; color: var(--text); }
-.section-text { max-width: 620px; margin: auto; line-height: 1.9; color: var(--muted); font-size: 15px; }
-
-/* ORNAMENT */
-.ornament { display: flex; align-items: center; gap: 15px; width: 180px; margin: 35px auto; }
-.ornament::before, .ornament::after { content: ""; flex: 1; height: 1px; background: linear-gradient(to right, transparent, var(--gold)); }
-.ornament::after { background: linear-gradient(to left, transparent, var(--gold)); }
-.ornament span { color: var(--gold-deep); font-size: 15px; }
-
-/* SCRATCH CARD */
-.scratch-shell { position: relative; width: 280px; height: 180px; margin: 10px auto 0; border-radius: 14px; overflow: hidden;
-    border: 1px solid rgba(201,162,74,.4); box-shadow: 0 10px 26px rgba(166,124,40,.18); }
-.scratch-reveal { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
-    background: linear-gradient(160deg, var(--card), var(--gold-light)); }
-.scratch-reveal .lbl { font-size: .75rem; letter-spacing: .08em; color: var(--gold-deep); text-transform: uppercase; }
-.scratch-reveal .val { font-size: 1.5rem; margin-top: 8px; color: var(--text); }
-canvas#scratchCanvas { position: absolute; inset: 0; touch-action: none; cursor: pointer; }
-.scratch-hint { font-size: .78rem; color: var(--muted); margin-top: 14px; }
-
-/* COUNTDOWN */
-.countdown { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; max-width: 650px; margin: 45px auto 0; }
-.count-box { padding: 22px 8px; border-top: 1px solid rgba(201,162,74,.5); border-bottom: 1px solid rgba(201,162,74,.5); background: var(--card); }
-.count-number { display: block; font-size: clamp(25px, 7vw, 45px); color: var(--gold-deep); }
-.count-label { display: block; margin-top: 7px; font-size: 8px; letter-spacing: 2px; color: var(--muted); }
-
-/* VENUE */
-.venue-card { max-width: 600px; margin: 40px auto 0; padding: 45px 25px; border: 1px solid rgba(201,162,74,.5);
-    background: linear-gradient(145deg, rgba(201,162,74,.10), transparent); }
-.venue-card h3 { font-size: 28px; font-weight: normal; color: var(--gold-deep); margin-bottom: 15px; }
-.venue-card p { color: var(--muted); line-height: 1.8; }
-.gold-button { display: inline-block; margin-top: 25px; padding: 14px 25px; border: 1px solid var(--gold-deep);
-    color: var(--gold-deep); text-decoration: none; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; transition: .3s; }
-.gold-button:hover { background: var(--gold-deep); color: var(--card); }
-
-/* FINAL */
-.final { min-height: 70vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 80px 20px; }
-.final h2 { font-size: clamp(35px, 10vw, 65px); font-weight: normal; line-height: 1.1; color: var(--text); }
-.final p { margin-top: 25px; color: var(--muted); letter-spacing: 2px; }
-
-/* MUSIC BUTTON */
-.music-button { position: fixed; right: 18px; bottom: calc(18px + env(safe-area-inset-bottom,0px)); z-index: 100;
-    width: 48px; height: 48px; border-radius: 50%; border: 1px solid var(--gold-deep);
-    background: rgba(255,253,247,.85); color: var(--gold-deep); cursor: pointer; backdrop-filter: blur(10px); }
-.music-button.playing { animation: musicPulse 1.5s infinite; }
-@keyframes musicPulse { 0%,100% { box-shadow: 0 0 0 rgba(166,124,40,0); } 50% { box-shadow: 0 0 20px rgba(166,124,40,.45); } }
-
-footer { text-align: center; padding: 30px 20px 50px; color: var(--muted); font-size: 10px; letter-spacing: 2px; }
-
-@media (max-width: 600px) {
-    .events { grid-template-columns: 1fr; }
-    .countdown { gap: 5px; }
-    .count-box { padding: 18px 4px; }
-    .story::before { left: 10px; }
-    .story-item, .story-item:nth-child(even) { width: 100%; margin-left: 0; padding-left: 40px; text-align: left; }
-    .story-item:nth-child(odd) .story-dot, .story-item:nth-child(even) .story-dot { left: 6px; right: auto; }
-    .gallery { grid-template-columns: 1fr; }
+.stage {
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: radial-gradient(circle, #fffafd, #f0cbd7);
 }
 
-.reveal { opacity: 0; transform: translateY(35px); transition: opacity 1s ease, transform 1s ease; }
-.reveal.visible { opacity: 1; transform: translateY(0); }
-@media (prefers-reduced-motion: reduce) { *{ animation-duration: .01ms !important; } }
+.card {
+  width: min(88vw, 410px);
+  aspect-ratio: 3 / 4;
+  position: relative;
+  perspective: 1400px;
+}
+
+.card-inner {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transition: transform 1.5s cubic-bezier(.5,.02,.2,1);
+}
+
+.card.open .card-inner { transform: rotateY(-180deg); }
+
+.cover, .inside {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  backface-visibility: hidden;
+  border: 1px solid var(--rose-gold);
+  outline: 1px solid #dcaaba;
+  outline-offset: -10px;
+  background: linear-gradient(145deg, #fffafd, #f4dce5);
+  box-shadow: 0 24px 50px #70405235;
+}
+
+.cover { z-index: 2; }
+
+.inside {
+  transform: rotateY(180deg);
+  background: linear-gradient(145deg, #fffafd, #f8e8ee);
+}
+
+.cover::before, .inside::before {
+  content: "✦";
+  position: absolute;
+  top: 25px;
+  color: var(--rose-gold);
+  font-size: 25px;
+}
+
+.cover::after, .inside::after {
+  content: "✦";
+  position: absolute;
+  bottom: 25px;
+  color: var(--rose-gold);
+  font-size: 25px;
+}
+
+.small {
+  font: 400 10px Montserrat, sans-serif;
+  letter-spacing: .35em;
+  text-transform: uppercase;
+  color: var(--rose);
+}
+
+.names {
+  font: 400 clamp(28px, 8vw, 42px) "Bodoni Moda", serif;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  line-height: 1.25;
+  margin: 22px 0;
+}
+
+.amp {
+  color: var(--rose-gold);
+  font: italic 32px "Cormorant Garamond", serif;
+}
+
+.poem {
+  font-size: 20px;
+  font-style: italic;
+  line-height: 1.5;
+  max-width: 270px;
+  margin: 18px auto;
+}
+
+.gold-line {
+  width: 65%;
+  height: 1px;
+  background: var(--rose-gold);
+  margin: 20px auto;
+}
+
+.open-btn, .button {
+  border: 1px solid var(--rose-gold);
+  background: transparent;
+  color: var(--rose);
+  padding: 13px 24px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  font: 400 10px Montserrat, sans-serif;
+  margin-top: 22px;
+}
+
+.open-btn:hover, .button:hover {
+  background: #f3d9e2;
+}
+
+main { display: none; }
+
+main.visible { display: block; }
+
+section {
+  min-height: 85svh;
+  padding: 100px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid #e8c4d0;
+}
+
+h1, h2 {
+  font: 400 clamp(32px, 8vw, 48px) "Bodoni Moda", serif;
+  margin: 20px 0;
+}
+
+h2 em {
+  color: var(--rose);
+  font-family: "Cormorant Garamond", serif;
+}
+
+p {
+  font-size: 21px;
+  line-height: 1.6;
+  max-width: 560px;
+}
+
+.date-card {
+  position: relative;
+  width: min(90vw, 340px);
+  height: 210px;
+  margin: 30px auto 10px;
+  border: 1px solid var(--rose-gold);
+  background: linear-gradient(145deg, #fffafd, #f3dce5);
+  box-shadow: 0 12px 30px #70405220;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.date-reveal {
+  font-family: "Bodoni Moda", serif;
+  font-size: 28px;
+  color: var(--rose);
+}
+
+#scratch {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+  cursor: crosshair;
+}
+
+.hint {
+  font: 10px Montserrat, sans-serif;
+  letter-spacing: .2em;
+  color: var(--rose);
+  margin-top: 18px;
+  text-transform: uppercase;
+}
+
+.countdown {
+  display: flex;
+  gap: 18px;
+  margin: 30px auto;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.countdown div {
+  min-width: 65px;
+  color: var(--rose);
+}
+
+.countdown strong {
+  display: block;
+  font: 32px "Bodoni Moda", serif;
+}
+
+.countdown span {
+  font: 9px Montserrat, sans-serif;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+}
+
+footer {
+  padding: 50px 20px;
+  color: var(--rose);
+  font-style: italic;
+  font-size: 20px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: .01ms !important; }
+}
 </style>
 </head>
 
 <body>
 
-<!-- INTRO / WAX SEAL ENVELOPE -->
-<div id="intro">
-    <div class="envelope-flap">
-        <div class="fold-line left"></div>
-        <div class="fold-line right"></div>
+<div class="stage" id="stage">
+  <div class="card" id="card">
+    <div class="card-inner">
+
+      <div class="cover">
+        <div class="small">Together with their families</div>
+        <div class="names">
+          Tabinda<br>
+          <span class="amp">&</span>
+          Adil
+        </div>
+        <div class="gold-line"></div>
+        <p class="poem">Two hearts, one promise, and a lifetime of love.</p>
+        <div class="small">Nikah Invitation</div>
+        <button class="open-btn" id="openBtn">Open Invitation</button>
+      </div>
+
+      <div class="inside">
+        <div class="small">Bismillah-ir-Rahman-ir-Raheem</div>
+        <div class="names">
+          Tabinda<br>
+          <span class="amp">&</span>
+          Adil
+        </div>
+        <div class="gold-line"></div>
+        <p class="poem">With the blessings of Allah and the love of our families, we invite you to celebrate our Nikah.</p>
+        <div class="small">You are warmly invited</div>
+      </div>
+
     </div>
-    <button class="wax-seal" id="openInvitation" aria-label="Tap to open invitation">
-        <span class="ws-star">✦</span>
-        <span class="ws-line1">Tap</span>
-        <span class="ws-line2">to</span>
-        <span class="ws-line1">open</span>
-    </button>
-    <div class="envelope-caption">Tabinda &amp; Adil — 9 October 2026</div>
+  </div>
 </div>
 
-<div class="particles" id="particles"></div>
+<main id="invitation">
 
-<main>
+  <section>
+    <div class="small">In the name of Allah, the Most Merciful</div>
+    <h1>Tabinda <em>&</em> Adil</h1>
+    <div class="gold-line"></div>
+    <p>With faith as our foundation and love as our guide, we invite you to join us as we begin this beautiful journey together.</p>
+  </section>
 
-<!-- HERO -->
-<section class="hero">
-    <div class="hero-content reveal">
-        <div class="eyebrow">Together With Their Families</div>
-        <h1>
-            Tabinda Khan
-            <span>and</span>
-            Adil Kamaal
-        </h1>
-        <div class="ornament"><span>✦</span></div>
-        <p class="section-text">Request the honour of your presence as they begin their journey together, in faith and in love.</p>
-        <div class="hero-date">9 OCTOBER 2026<br>NIKAH CEREMONY — TIME TO BE ANNOUNCED</div>
-        <div class="scroll-indicator">SCROLL TO DISCOVER</div>
+  <section>
+    <div class="small">A little secret</div>
+    <h2>Discover <em>the date</em></h2>
+    <p>Gently scratch the card to reveal our special day.</p>
+
+    <div class="date-card" id="dateCard">
+      <div class="date-reveal">
+        9 October 2026
+      </div>
+      <canvas id="scratch"></canvas>
     </div>
-</section>
+    <div class="hint">Scratch to discover</div>
+  </section>
 
-<!-- SCRATCH TO REVEAL -->
-<section class="section reveal">
-    <div class="section-label">A Little Surprise</div>
-    <h2 class="section-title">Scratch To Reveal</h2>
-    <div class="ornament"><span>✦</span></div>
-    <div class="scratch-shell">
-        <div class="scratch-reveal">
-            <span class="lbl">Save The Date</span>
-            <span class="val">09 . 10 . 2026</span>
-        </div>
-        <canvas id="scratchCanvas" width="280" height="180"></canvas>
-    </div>
-    <div class="scratch-hint">swipe your finger across the card</div>
-</section>
-
-<!-- COUNTDOWN -->
-<section class="section reveal">
-    <div class="section-label">Counting The Moments</div>
-    <h2 class="section-title">Until Our Nikah</h2>
-    <div class="ornament"><span>✦</span></div>
+  <section>
+    <div class="small">Counting down to forever</div>
+    <h2>Our <em>special day</em></h2>
     <div class="countdown">
-        <div class="count-box"><span class="count-number" id="days">00</span><span class="count-label">DAYS</span></div>
-        <div class="count-box"><span class="count-number" id="hours">00</span><span class="count-label">HOURS</span></div>
-        <div class="count-box"><span class="count-number" id="minutes">00</span><span class="count-label">MINUTES</span></div>
-        <div class="count-box"><span class="count-number" id="seconds">00</span><span class="count-label">SECONDS</span></div>
+      <div><strong id="days">00</strong><span>Days</span></div>
+      <div><strong id="hours">00</strong><span>Hours</span></div>
+      <div><strong id="minutes">00</strong><span>Minutes</span></div>
+      <div><strong id="seconds">00</strong><span>Seconds</span></div>
     </div>
-</section>
+  </section>
 
-<!-- VENUE -->
-<section class="section reveal">
-    <div class="section-label">Where We Celebrate</div>
-    <h2 class="section-title">The Venue</h2>
-    <div class="ornament"><span>⌖</span></div>
-    <div class="venue-card">
-        <h3>Bandhan Marriage Hall</h3>
-        <p>Shaukat Ali Rd, near Preity Nursing Home,<br>Choki Peela Talab, Civil Lines,<br>Rampur, Uttar Pradesh 244901</p>
-        <a class="gold-button" href="https://www.google.com/maps/dir//Bandhan+Marriage+Hall,+Shaukat+Ali+Rd,+near+Preity+Nursing+Home,+Choki+Peela+Talab,+Civil+Lines,+Rampur,+Uttar+Pradesh+244926/@27.1839918,77.9845632,10z/data=!4m8!4m7!1m0!1m5!1m1!1s0x390a8dee82fd72ad:0x20f2aa20ef9dd7d2!2m2!1d79.0245268!2d28.7914437?entry=ttu&g_ep=EgoyMDI2MDkyMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">View On Google Maps</a>
-    </div>
-</section>
+  <section>
+    <div class="small">The celebration</div>
+    <h2>Join <em>us</em></h2>
+    <div class="gold-line"></div>
+    <p><strong>Bandhan Marriage Hall</strong><br>Rampur, Uttar Pradesh</p>
+    <p style="margin-top:25px">We would be honoured by your presence and blessings.</p>
+  </section>
 
-<!-- FINAL -->
-<section class="final reveal">
-    <div>
-        <div class="section-label">With Love</div>
-        <h2>We Can't Wait<br>To Celebrate<br>With You</h2>
-        <div class="ornament"><span>♡</span></div>
-        <p>TABINDA KHAN &amp; ADIL KAMAAL</p>
-    </div>
-</section>
-
-<footer>MADE WITH LOVE ✦</footer>
+  <footer>
+    With love and duas,<br>
+    Tabinda & Adil
+  </footer>
 
 </main>
 
-<button class="music-button" id="musicButton" aria-label="Toggle music">♫</button>
-<audio id="music" loop preload="auto" src="music.mp3"></audio>
-
 <script>
-const intro = document.getElementById("intro");
-document.getElementById("openInvitation").addEventListener("click", () => {
-    intro.classList.add("opening");
-    startMusic();
+const card = document.getElementById("card");
+const stage = document.getElementById("stage");
+const invitation = document.getElementById("invitation");
+
+document.getElementById("openBtn").addEventListener("click", () => {
+  card.classList.add("open");
+
+  setTimeout(() => {
+    stage.style.transition = "opacity 1s ease";
+    stage.style.opacity = "0";
+
     setTimeout(() => {
-        intro.classList.add("hidden");
-        document.body.style.overflow = "auto";
-    }, 550);
+      stage.style.display = "none";
+      invitation.classList.add("visible");
+    }, 1000);
+  }, 1500);
 });
 
-const particles = document.getElementById("particles");
-for (let i = 0; i < 35; i++) {
-    const p = document.createElement("div");
-    p.className = "particle";
-    p.style.left = Math.random() * 100 + "%";
-    p.style.animationDuration = (8 + Math.random() * 12) + "s";
-    p.style.animationDelay = Math.random() * 10 + "s";
-    p.style.width = p.style.height = (1 + Math.random() * 3) + "px";
-    particles.appendChild(p);
+/* Scratch-to-reveal card */
+const canvas = document.getElementById("scratch");
+const ctx = canvas.getContext("2d");
+let drawing = false;
+let scratched = false;
+
+function drawFoil() {
+  const rect = canvas.getBoundingClientRect();
+  const dpr = window.devicePixelRatio || 1;
+
+  canvas.width = rect.width * dpr;
+  canvas.height = rect.height * dpr;
+  ctx.scale(dpr, dpr);
+
+  const gradient = ctx.createLinearGradient(0, 0, rect.width, rect.height);
+  gradient.addColorStop(0, "#dcaabb");
+  gradient.addColorStop(.5, "#c47a91");
+  gradient.addColorStop(1, "#e9c3cf");
+
+  ctx.fillStyle = gradient;
+  ctx.fillRect(0, 0, rect.width, rect.height);
+
+  ctx.fillStyle = "#fff9fb";
+  ctx.font = 'italic 24px "Cormorant Garamond", serif';
+  ctx.textAlign = "center";
+  ctx.fillText("A little secret", rect.width / 2, rect.height / 2 - 5);
+
+  ctx.font = "10px Montserrat, sans-serif";
+  ctx.fillText("SCRATCH TO DISCOVER", rect.width / 2, rect.height / 2 + 25);
 }
 
-/* COUNTDOWN — edit the target date/time below */
-const weddingDate = new Date("October 9, 2026 00:00:00").getTime();
-function updateCountdown() {
-    const distance = weddingDate - new Date().getTime();
-    if (distance <= 0) {
-        ["days","hours","minutes","seconds"].forEach(id => document.getElementById(id).textContent = "00");
-        return;
-    }
-    const days = Math.floor(distance / 86400000);
-    const hours = Math.floor((distance % 86400000) / 3600000);
-    const minutes = Math.floor((distance % 3600000) / 60000);
-    const seconds = Math.floor((distance % 60000) / 1000);
-    document.getElementById("days").textContent = days;
-    document.getElementById("hours").textContent = String(hours).padStart(2,"0");
-    document.getElementById("minutes").textContent = String(minutes).padStart(2,"0");
-    document.getElementById("seconds").textContent = String(seconds).padStart(2,"0");
-}
-updateCountdown();
-setInterval(updateCountdown, 1000);
+function scratch(e) {
+  if (!drawing) return;
 
-const revealElements = document.querySelectorAll(".reveal");
-const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("visible"); });
-}, { threshold: 0.15 });
-revealElements.forEach(el => observer.observe(el));
+  const rect = canvas.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
 
-/* SCRATCH CARD */
-const canvas = document.getElementById('scratchCanvas');
-const ctx = canvas.getContext('2d');
-function paintScratch(){
-    const g = ctx.createLinearGradient(0,0,canvas.width,canvas.height);
-    g.addColorStop(0,'#caa74a'); g.addColorStop(.5,'#e9d38a'); g.addColorStop(1,'#b8912f');
-    ctx.fillStyle = g; ctx.fillRect(0,0,canvas.width,canvas.height);
-    ctx.fillStyle = 'rgba(60,42,10,.4)';
-    ctx.font = '14px Georgia'; ctx.textAlign = 'center';
-    ctx.fillText('✦ scratch here ✦', canvas.width/2, canvas.height/2);
-}
-paintScratch();
-ctx.globalCompositeOperation = 'destination-out';
-let scratching = false;
-function pos(e){
-    const r = canvas.getBoundingClientRect();
-    const p = e.touches ? e.touches[0] : e;
-    return {x:(p.clientX-r.left)*(canvas.width/r.width), y:(p.clientY-r.top)*(canvas.height/r.height)};
-}
-function scratchAt(x,y){ ctx.beginPath(); ctx.arc(x,y,20,0,Math.PI*2); ctx.fill(); }
-['mousedown','touchstart'].forEach(ev=>canvas.addEventListener(ev,e=>{scratching=true;const p=pos(e);scratchAt(p.x,p.y);}));
-['mousemove','touchmove'].forEach(ev=>canvas.addEventListener(ev,e=>{if(!scratching)return;e.preventDefault();const p=pos(e);scratchAt(p.x,p.y);}));
-['mouseup','mouseleave','touchend'].forEach(ev=>canvas.addEventListener(ev,()=>scratching=false));
+  ctx.globalCompositeOperation = "destination-out";
+  ctx.beginPath();
+  ctx.arc(x, y, 22, 0, Math.PI * 2);
+  ctx.fill();
 
-/* MUSIC */
-const music = document.getElementById("music");
-const musicButton = document.getElementById("musicButton");
-let musicPlaying = false;
-function startMusic(){
-    if (!music.src) return;
-    music.volume = 0.35;
-    music.play().then(()=>{ musicPlaying = true; musicButton.classList.add("playing"); }).catch(()=>{});
+  if (!scratched) {
+    scratched = true;
+    setTimeout(() => {
+      canvas.style.transition = "opacity 1s ease";
+      canvas.style.opacity = "0";
+      startCountdown();
+    }, 2500);
+  }
 }
-musicButton.addEventListener("click", () => {
-    if (!music.src) { alert("Add your music file inside the audio element."); return; }
-    if (musicPlaying) { music.pause(); musicPlaying = false; musicButton.classList.remove("playing"); }
-    else { music.play(); musicPlaying = true; musicButton.classList.add("playing"); }
+
+canvas.addEventListener("pointerdown", e => {
+  drawing = true;
+  canvas.setPointerCapture(e.pointerId);
+  scratch(e);
 });
+
+canvas.addEventListener("pointermove", scratch);
+canvas.addEventListener("pointerup", () => drawing = false);
+canvas.addEventListener("pointercancel", () => drawing = false);
+
+drawFoil();
+window.addEventListener("resize", () => {
+  if (!scratched) drawFoil();
+});
+
+/* Countdown */
+function startCountdown() {
+  const target = new Date(2026, 9, 9, 0, 0, 0);
+
+  function update() {
+    const now = new Date();
+    let remaining = Math.max(0, target - now);
+
+    const days = Math.floor(remaining / 86400000);
+    remaining %= 86400000;
+
+    const hours = Math.floor(remaining / 3600000);
+    remaining %= 3600000;
+
+    const minutes = Math.floor(remaining / 60000);
+    const seconds = Math.floor((remaining % 60000) / 1000);
+
+    document.getElementById("days").textContent = String(days).padStart(2, "0");
+    document.getElementById("hours").textContent = String(hours).padStart(2, "0");
+    document.getElementById("minutes").textContent = String(minutes).padStart(2, "0");
+    document.getElementById("seconds").textContent = String(seconds).padStart(2, "0");
+  }
+
+  update();
+  setInterval(update, 1000);
+}
 </script>
 
 </body>
