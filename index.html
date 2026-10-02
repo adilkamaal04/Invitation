@@ -3,1646 +3,1020 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Tabinda & Adil</title>
+<title>Tabinda & Adil | Wedding Invitation</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,600&family=Cormorant+Garamond:wght@300;400;500;600&family=Italianno&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=Cormorant+Garamond:wght@400;500;600&family=Italianno&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
-
-/* =========================================================
-   GLOBAL
-========================================================= */
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-html{
-    scroll-behavior:smooth;
-}
-
-body{
-    background:
-        radial-gradient(circle at 20% 10%, rgba(255,255,255,.9), transparent 25%),
-        radial-gradient(circle at 80% 80%, rgba(238,185,196,.25), transparent 30%),
-        #ead0d2;
-
-    color:#4b202b;
-    font-family:"Cormorant Garamond",serif;
-}
-
-button{
-    font-family:inherit;
-}
-
-:root{
-    --pink:#d69aa7;
-    --deep-pink:#7e2d43;
-    --burgundy:#642033;
-    --gold:#b98b52;
-    --light-gold:#d9b779;
-    --cream:#fff7f0;
-    --paper:#f9e9e7;
-}
-
-/* =========================================================
-   OPENING SCREEN
-========================================================= */
-
-#opening{
-    position:fixed;
-    inset:0;
-    z-index:9999;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    background:
-        radial-gradient(circle at 30% 20%,rgba(255,255,255,.45),transparent 30%),
-        linear-gradient(135deg,#d9b3a4,#f2d8d4,#c89b8e);
-
-    transition:opacity 1s ease,visibility 1s ease;
-}
-
-#opening.hidden{
-    opacity:0;
-    visibility:hidden;
-    pointer-events:none;
-}
-
-.envelope-wrap{
-    width:min(88vw,430px);
-    text-align:center;
-}
-
-.envelope{
-    position:relative;
-    width:100%;
-    aspect-ratio:1.42;
-    border-radius:18px;
-
-    background:
-        linear-gradient(135deg,
-            rgba(255,255,255,.35),
-            transparent 30%),
-        linear-gradient(145deg,#d7b29f,#b88f7e,#e1c0ae);
-
-    box-shadow:
-        0 30px 70px rgba(70,30,25,.3),
-        inset 0 1px rgba(255,255,255,.7);
-
-    border:1px solid rgba(91,55,44,.45);
-
-    overflow:hidden;
-}
-
-.envelope:before{
-    content:"";
-    position:absolute;
-    inset:0;
-
-    background:
-        linear-gradient(145deg,transparent 49%,rgba(94,57,45,.18) 50%,transparent 51%),
-        linear-gradient(215deg,transparent 49%,rgba(94,57,45,.15) 50%,transparent 51%);
-}
-
-.envelope-flap{
-    position:absolute;
-    top:0;
-    left:0;
-
-    width:100%;
-    height:58%;
-
-    background:linear-gradient(145deg,#e4c1ad,#c99d8b);
-
-    clip-path:polygon(0 0,100% 0,50% 100%);
-
-    border-bottom:1px solid rgba(105,60,50,.3);
-}
-
-.seal{
-    position:absolute;
-    left:50%;
-    top:50%;
-
-    transform:translate(-50%,-50%);
-
-    width:92px;
-    height:92px;
-
-    border-radius:50%;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    background:
-        radial-gradient(circle,#d9a64e 0%,#a96d2e 70%,#81501e 100%);
-
-    color:#fff5df;
-
-    border:4px solid #d8ad67;
-
-    box-shadow:
-        0 8px 20px rgba(63,31,20,.4),
-        inset 0 2px 5px rgba(255,255,255,.4);
-}
-
-.seal span{
-    font-family:"Italianno",cursive;
-    font-size:38px;
-}
-
-.open-label{
-    margin-top:30px;
-
-    color:#fffaf5;
-
-    font-family:"Montserrat",sans-serif;
-    font-size:12px;
-    letter-spacing:5px;
-
-    text-transform:uppercase;
-}
-
-.open-sub{
-    margin-top:10px;
-    color:#fff4ef;
-
-    font-size:14px;
-    letter-spacing:2px;
-}
-
-/* =========================================================
-   MAIN
-========================================================= */
-
-#invitation{
-    display:none;
-}
-
-#invitation.visible{
-    display:block;
-}
-
-.invitation-grid{
-    width:min(1500px,96vw);
-    margin:25px auto;
-
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:12px;
-}
-
-/* =========================================================
-   PANEL
-========================================================= */
-
-.panel{
-    position:relative;
-
-    min-height:700px;
-
-    padding:48px 30px;
-
-    overflow:hidden;
-
-    border-radius:18px;
-
-    background:
-        radial-gradient(circle at 15% 20%,rgba(255,255,255,.8),transparent 18%),
-        radial-gradient(circle at 80% 70%,rgba(222,152,168,.18),transparent 30%),
-        linear-gradient(145deg,#fff6f0,#f8e3e1);
-
-    border:1px solid rgba(157,105,71,.55);
-
-    box-shadow:
-        0 12px 35px rgba(76,39,39,.15),
-        inset 0 0 0 1px rgba(255,255,255,.65);
-
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    text-align:center;
-}
-
-/* GOLD CORNER */
-
-.panel:before,
-.panel:after{
-    content:"";
-    position:absolute;
-
-    width:55px;
-    height:55px;
-
-    border-color:rgba(178,132,73,.8);
-    border-style:solid;
-}
-
-.panel:before{
-    top:10px;
-    left:10px;
-
-    border-width:1px 0 0 1px;
-}
-
-.panel:after{
-    right:10px;
-    bottom:10px;
-
-    border-width:0 1px 1px 0;
-}
-
-/* =========================================================
-   FLORAL DECOR
-========================================================= */
-
-.flower{
-    position:absolute;
-    color:#c7788d;
-    opacity:.7;
-    font-size:42px;
-}
-
-.flower.tl{
-    top:18px;
-    left:15px;
-}
-
-.flower.tr{
-    top:20px;
-    right:18px;
-}
-
-.flower.bl{
-    bottom:15px;
-    left:12px;
-}
-
-.flower.br{
-    bottom:15px;
-    right:12px;
-}
-
-/* =========================================================
-   TYPOGRAPHY
-========================================================= */
-
-.eyebrow{
-    font-family:"Montserrat",sans-serif;
-    font-size:9px;
-    letter-spacing:4px;
-    text-transform:uppercase;
-
-    color:#8a5b61;
-
-    margin-bottom:22px;
-}
-
-.bismillah{
-    font-family:"Amiri",serif;
-    font-size:32px;
-    color:#6d2739;
-
-    margin:20px 0;
-}
-
-.script{
-    font-family:"Italianno",cursive;
-    font-weight:400;
-    color:#682438;
-}
-
-.names{
-    font-family:"Italianno",cursive;
-    font-size:76px;
-    line-height:.82;
-    color:#6d263b;
-
-    margin:15px 0;
-}
-
-.and{
-    font-family:"Cormorant Garamond",serif;
-    font-size:28px;
-    font-style:italic;
-    color:#a87953;
-}
-
-.heading{
-    font-family:"Bodoni Moda",serif;
-    font-size:38px;
-    font-weight:500;
-    color:#682438;
-
-    margin-bottom:20px;
-}
-
-.subheading{
-    font-family:"Bodoni Moda",serif;
-    font-size:23px;
-    color:#6c293d;
-}
-
-.body{
-    font-size:17px;
-    line-height:1.55;
-    color:#4c3035;
-}
-
-.gold-line{
-    width:90px;
-    height:1px;
-
-    background:linear-gradient(
-        90deg,
-        transparent,
-        #b58a54,
-        transparent
-    );
-
-    margin:18px auto;
-}
-
-.ornament{
-    color:#ad7b47;
-    font-size:19px;
-    margin:10px 0;
-}
-
-/* =========================================================
-   PANEL 1
-========================================================= */
-
-.open-panel{
-    padding:0;
-    justify-content:flex-end;
-
-    background:
-        linear-gradient(
-            rgba(80,40,35,.08),
-            rgba(80,40,35,.08)
-        ),
-        radial-gradient(circle at 50% 30%,#d9b9a6,#9d7768);
-
-    color:white;
-}
-
-.open-panel:before,
-.open-panel:after{
-    border-color:rgba(255,255,255,.6);
-}
-
-.open-panel-content{
-    width:100%;
-    padding:40px 20px 48px;
-
-    background:
-        linear-gradient(
-            transparent,
-            rgba(58,29,26,.38)
-        );
-}
-
-.open-panel .eyebrow{
-    color:white;
-}
-
-.open-panel .open-label{
-    margin-top:10px;
-}
-
-/* =========================================================
-   HERO
-========================================================= */
-
-.hero{
-    justify-content:flex-start;
-}
-
-.hero-intro{
-    margin-top:15px;
+:root {
+  --ink: #542333;
+  --wine: #762d43;
+  --pink: #d995a7;
+  --rose: #efc9ce;
+  --paper: #fff5f0;
+  --gold: #b78a50;
+  --gold-light: #dfc18d;
+  --line: rgba(183,138,80,.65);
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behaviour: smooth; }
+
+body {
+  margin: 0;
+  color: var(--ink);
+  background:
+    radial-gradient(ellipse at 15% 10%, #fff9f5 0, transparent 35%),
+    radial-gradient(ellipse at 85% 90%, #e6bfc6 0, transparent 38%),
+    #e9cdd0;
+  font-family: "Cormorant Garamond", serif;
+}
+
+button { font: inherit; }
+
+.invitation-grid {
+  width: min(1600px, 98vw);
+  margin: 12px auto;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+/* Every invitation panel */
+.panel {
+  min-width: 0;
+  min-height: 730px;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: 44px 24px 38px;
+  border: 1px solid rgba(135,91,62,.62);
+  border-radius: 17px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background:
+    radial-gradient(circle at 10% 12%, rgba(255,255,255,.9), transparent 25%),
+    radial-gradient(circle at 90% 88%, rgba(222,160,172,.20), transparent 32%),
+    linear-gradient(145deg, #fff8f3, #f8e7e5 65%, #f4dedc);
+  box-shadow:
+    0 8px 25px rgba(81,43,46,.13),
+    inset 0 0 0 3px rgba(255,255,255,.35);
+}
+
+/* Fine gold corner lines */
+.panel::before,
+.panel::after {
+  content: "";
+  position: absolute;
+  width: 38px;
+  height: 38px;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.panel::before {
+  top: 10px;
+  left: 10px;
+  border-top: 1px solid var(--gold);
+  border-left: 1px solid var(--gold);
+}
+
+.panel::after {
+  right: 10px;
+  bottom: 10px;
+  border-right: 1px solid var(--gold);
+  border-bottom: 1px solid var(--gold);
+}
+
+.inner-frame {
+  position: absolute;
+  inset: 15px;
+  border: 1px solid rgba(183,138,80,.28);
+  border-radius: 11px;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.eyebrow {
+  font: 300 9px/1.9 "Montserrat", sans-serif;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #80535b;
+}
+
+.heading {
+  margin: 0;
+  font: 400 clamp(34px, 3vw, 45px)/1.05 "Italianno", cursive;
+  color: var(--wine);
+}
+
+.script {
+  font-family: "Italianno", cursive;
+  color: var(--wine);
+  font-weight: 400;
+}
+
+.body-copy {
+  font-size: 17px;
+  line-height: 1.45;
+  color: #4d3438;
+}
+
+.gold-divider {
+  width: 88px;
+  height: 1px;
+  margin: 17px auto;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  position: relative;
+}
+
+.gold-divider::after {
+  content: "✧";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-55%);
+  padding: 0 7px;
+  background: #f9e9e6;
+  color: var(--gold);
+  font-size: 16px;
+}
+
+.flower {
+  position: absolute;
+  color: #cf8296;
+  opacity: .8;
+  font-size: 42px;
+  line-height: 1;
+  text-shadow: 0 2px 5px rgba(125,49,72,.12);
+  pointer-events: none;
+}
+
+.flower.one { top: 14px; left: 12px; }
+.flower.two { top: 36%; right: 8px; font-size: 28px; }
+.flower.three { bottom: 13px; left: 10px; font-size: 48px; }
+.flower.four { bottom: 18px; right: 12px; font-size: 37px; }
+
+.leaf {
+  position: absolute;
+  color: #8d9b69;
+  opacity: .65;
+  font-size: 26px;
+  pointer-events: none;
+}
+
+/* Decorative arch */
+.arch {
+  position: absolute;
+  z-index: -1;
+  width: 82%;
+  height: 44%;
+  top: 7%;
+  left: 9%;
+  border: 1px solid rgba(183,138,80,.65);
+  border-bottom: 0;
+  border-radius: 48% 48% 0 0 / 35% 35% 0 0;
+  box-shadow: 0 0 0 5px rgba(255,255,255,.15);
+}
+
+/* ---------- 1. Envelope panel ---------- */
+.envelope-panel {
+  padding: 0;
+  min-height: 730px;
+  justify-content: flex-end;
+  cursor: pointer;
+  color: #fff8ed;
+  background:
+    radial-gradient(ellipse at 25% 17%, rgba(255,245,226,.38), transparent 30%),
+    linear-gradient(145deg, #b18a78, #dfc0ad 48%, #a17b6a);
+}
+
+.envelope-panel::before,
+.envelope-panel::after {
+  border-color: rgba(255,242,215,.7);
+}
+
+.envelope-panel .inner-frame { border-color: rgba(255,242,215,.3); }
+
+.envelope-art {
+  position: absolute;
+  inset: 8% 0 27%;
+  background:
+    linear-gradient(145deg, transparent 49.7%, rgba(105,70,56,.3) 50%, transparent 50.5%),
+    linear-gradient(215deg, transparent 49.7%, rgba(105,70,56,.25) 50%, transparent 50.5%),
+    linear-gradient(145deg, #f0d9c7, #c9a894);
+  clip-path: polygon(0 0,100% 0,100% 100%,0 100%);
+  border-bottom: 1px solid rgba(91,57,44,.4);
+}
+
+.envelope-flap {
+  position: absolute;
+  top: 8%;
+  left: 0;
+  width: 100%;
+  height: 39%;
+  background: linear-gradient(145deg, #f1ddcf, #c9a38e);
+  clip-path: polygon(0 0,100% 0,50% 100%);
+  filter: drop-shadow(0 5px 5px rgba(65,39,32,.2));
+}
+
+.envelope-seal {
+  position: absolute;
+  top: 49%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: #fff0d1;
+  font: 400 40px "Italianno", cursive;
+  background: radial-gradient(circle at 35% 30%, #d8ad66, #99652f 72%, #74451f);
+  border: 4px double #f0d5a0;
+  box-shadow: 0 7px 18px rgba(55,31,20,.38), inset 0 2px 5px #f8dca2;
+}
+
+.envelope-copy {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding: 30px 12px 38px;
+  background: linear-gradient(transparent, rgba(61,35,29,.38));
+}
+
+.envelope-copy .eyebrow { color: #fff8ed; }
+.tap-label {
+  margin-top: 13px;
+  font: 300 10px "Montserrat", sans-serif;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+.tap-hand { font-size: 28px; margin-top: 10px; }
+
+/* ---------- 2. Names / hero ---------- */
+.hero-panel { justify-content: flex-start; }
+.hero-panel .bismillah {
+  margin: 105px 0 26px;
+  font: 400 31px "Amiri", serif;
+  color: #68283d;
+}
+.hero-panel .names {
+  margin: 32px 0 24px;
+  font: 400 clamp(65px, 6vw, 84px)/.78 "Italianno", cursive;
+  color: #67263b;
+}
+.hero-panel .and {
+  display: block;
+  margin: 15px 0;
+  font: italic 30px "Cormorant Garamond", serif;
+  color: var(--gold);
+}
+.hero-panel .bottom-copy { margin-top: auto; padding-bottom: 18px; }
+
+/* Hanging lantern ornaments */
+.lantern {
+  position: absolute;
+  top: 7%;
+  color: #b77e38;
+  font-size: 31px;
+  filter: drop-shadow(0 3px 3px rgba(91,49,25,.2));
+}
+.lantern.left { left: 7%; }
+.lantern.right { right: 7%; top: 13%; }
+
+/* ---------- 3. Family panel ---------- */
+.monogram {
+  width: 100px;
+  height: 100px;
+  margin: 28px 0 35px;
+  border: 1px solid var(--gold);
+  outline: 1px solid rgba(183,138,80,.45);
+  outline-offset: 5px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font: 400 49px "Italianno", cursive;
+  color: var(--wine);
+}
+.family-panel .body-copy { margin: 0; }
+.family-panel .person {
+  margin: 20px 0 5px;
+  font: 400 51px/.95 "Italianno", cursive;
+  color: var(--wine);
+}
+.family-panel .with {
+  margin: 18px 0 8px;
+  font: 400 28px "Italianno", cursive;
+  color: var(--gold);
+}
+.family-panel .groom {
+  font-size: 43px;
+  margin-top: 18px;
+}
+
+/* ---------- 4. Programme panel ---------- */
+.programme-panel { padding-left: 18px; padding-right: 18px; }
+.programme-panel .heading { margin-top: 20px; }
+.events {
+  width: 100%;
+  margin-top: 18px;
+  position: relative;
+}
+.events::before {
+  content: "";
+  position: absolute;
+  left: 27px;
+  top: 35px;
+  bottom: 35px;
+  width: 1px;
+  background: var(--gold);
+}
+.event {
+  position: relative;
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  align-items: center;
+  gap: 8px;
+  min-height: 100px;
+  margin: 15px 0;
+  padding: 10px 8px;
+  border: 1px solid rgba(183,138,80,.65);
+  border-radius: 12px;
+  background: rgba(255,250,245,.45);
+  text-align: left;
+}
+.event-icon {
+  z-index: 1;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  border: 1px solid var(--gold);
+  background: #fff4ec;
+  display: grid;
+  place-items: center;
+  color: #9b682f;
+  font-size: 25px;
+}
+.event-title {
+  font: 400 25px/1.1 "Bodoni Moda", serif;
+  color: var(--wine);
+}
+.event-detail { font-size: 17px; line-height: 1.35; }
+
+/* Venue inset */
+.venue-inset {
+  margin-top: auto;
+  width: 100%;
+  padding: 20px 8px;
+  border: 1px solid var(--gold);
+  border-radius: 12px;
+  background: rgba(255,247,241,.5);
+}
+.venue-inset .heading { font-size: 35px; }
+.venue-name {
+  margin: 12px 0 4px;
+  font: 400 21px/1.2 "Bodoni Moda", serif;
+}
+
+/* ---------- 5. Scratch panel ---------- */
+.scratch-panel { justify-content: flex-start; }
+.scratch-panel .heading { margin-top: 135px; }
+.scratch-panel .scratch-intro {
+  margin-top: 18px;
+  font: 300 9px/2 "Montserrat", sans-serif;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+.scratch-wrap {
+  position: relative;
+  width: min(100%, 270px);
+  height: 115px;
+  margin: 34px auto 12px;
+  border: 1px solid var(--gold);
+  border-radius: 13px;
+  overflow: hidden;
+  background: #fff5ef;
+}
+.scratch-under {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--wine);
+}
+.scratch-under small {
+  font: 300 9px "Montserrat", sans-serif;
+  letter-spacing: 2px;
+}
+.scratch-under strong {
+  margin-top: 8px;
+  font: 400 25px "Bodoni Moda", serif;
+}
+#scratchCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+  cursor: crosshair;
+}
+.scratch-hint {
+  font: 300 9px/2 "Montserrat", sans-serif;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-top: 12px;
+}
+.mosque-art {
+  width: 100%;
+  max-width: 300px;
+  margin-top: auto;
+  opacity: .9;
+}
+
+/* ---------- 6. Countdown panel ---------- */
+.countdown-panel { justify-content: flex-start; }
+.countdown-panel .heading { margin-top: 145px; }
+.countdown-panel .count-copy {
+  margin-top: 18px;
+  font: 300 9px/2 "Montserrat", sans-serif;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+.countdown {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 7px;
+  width: 100%;
+  margin-top: 35px;
+}
+.count-box {
+  aspect-ratio: 1;
+  border: 1px solid rgba(183,138,80,.65);
+  border-radius: 50%;
+  background: rgba(255,250,245,.48);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.count-number { font: 400 23px "Bodoni Moda", serif; }
+.count-label {
+  margin-top: 3px;
+  font: 300 7px "Montserrat", sans-serif;
+  letter-spacing: 1px;
+}
+.countdown-panel .mosque-art { margin-top: auto; }
+
+/* ---------- 7. Venue panel ---------- */
+.venue-panel { justify-content: flex-start; }
+.venue-panel .heading { margin-top: 15px; }
+.venue-panel .venue-name { margin-top: 20px; font-size: 23px; }
+.venue-picture {
+  width: 100%;
+  height: 235px;
+  margin: 26px 0 16px;
+  overflow: hidden;
+  border: 5px solid #fff6ee;
+  outline: 1px solid var(--gold);
+  background:
+    linear-gradient(to top, rgba(70,35,38,.2), transparent 55%),
+    radial-gradient(ellipse at 50% 75%, #eac6a1 0 10%, transparent 11%),
+    linear-gradient(180deg,#3b2d43,#9b6c76 55%,#d6a98e);
+  position: relative;
+}
+.venue-picture svg { width: 100%; height: 100%; display: block; }
+.map-button {
+  display: inline-block;
+  margin-top: 18px;
+  padding: 13px 25px;
+  border-radius: 30px;
+  background: linear-gradient(100deg,#8b3d54,#a64c62);
+  border: 1px solid #e3bd91;
+  color: white;
+  text-decoration: none;
+  font: 300 9px "Montserrat", sans-serif;
+  letter-spacing: 3px;
+  box-shadow: 0 5px 15px rgba(91,35,55,.18);
+}
+.venue-panel .quote {
+  margin-top: auto;
+  font: 300 9px/2 "Montserrat", sans-serif;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* ---------- 8. Gratitude panel ---------- */
+.gratitude-panel { justify-content: flex-start; }
+.gratitude-panel .heading { margin-top: 145px; }
+.gratitude-panel .body-copy { margin-top: 24px; }
+.gratitude-panel .signature {
+  margin-top: 45px;
+  font: 400 53px "Italianno", cursive;
+  color: var(--wine);
+}
+.heart { color: #a43e5b; font-size: 24px; margin-top: 8px; }
+.gratitude-panel .mosque-art { margin-top: auto; }
+
+/* ---------- 9. Final panel ---------- */
+.final-panel {
+  justify-content: center;
+  background:
+    radial-gradient(ellipse at 50% 45%, rgba(255,255,255,.8), transparent 48%),
+    linear-gradient(150deg,#f7e4e1,#eecdd0);
+}
+.final-panel .final-title {
+  font: 400 clamp(60px, 6vw, 82px)/.82 "Italianno", cursive;
+  color: var(--wine);
+}
+.final-panel .final-copy {
+  margin-top: 28px;
+  font: 300 9px/2 "Montserrat", sans-serif;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+.final-panel .mosque-art { margin-top: 55px; }
+
+/* Panels are revealed when the envelope is opened */
+.panel.locked { display: none; }
+
+.music-button {
+  position: fixed;
+  z-index: 20;
+  right: 18px;
+  bottom: 18px;
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  color: var(--wine);
+  background: #fff7ef;
+  box-shadow: 0 5px 18px rgba(67,35,39,.2);
+  cursor: pointer;
+  display: none;
+}
+
+@media (max-width: 1050px) {
+  .invitation-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .panel { min-height: 690px; }
+}
+
+@media (max-width: 600px) {
+  .invitation-grid {
+    width: min(94vw, 420px);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin: 12px auto;
+  }
+  .panel { min-height: 690px; padding-left: 28px; padding-right: 28px; }
+  .envelope-panel { padding: 0; }
+  .hero-panel .names { font-size: 82px; }
+  .family-panel .person { font-size: 56px; }
+  .programme-panel { padding-left: 22px; padding-right: 22px; }
+  .final-panel .final-title { font-size: 76px; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .envelope-seal { animation: sealGlow 3s ease-in-out infinite; }
+  @keyframes sealGlow {
+    0%,100% { box-shadow: 0 7px 18px rgba(55,31,20,.38), inset 0 2px 5px #f8dca2; }
+    50% { box-shadow: 0 7px 24px rgba(55,31,20,.45), 0 0 18px rgba(255,221,157,.5), inset 0 2px 5px #f8dca2; }
+  }
 }
-
-.hero-bottom{
-    margin-top:auto;
-}
-
-.hero-small{
-    font-family:"Montserrat",sans-serif;
-    font-size:9px;
-    letter-spacing:3px;
-    line-height:2;
-
-    color:#704b4f;
-}
-
-/* =========================================================
-   COUPLE PANEL
-========================================================= */
-
-.monogram{
-    width:100px;
-    height:100px;
-
-    border:1px solid #b98b52;
-    border-radius:50%;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    font-family:"Italianno",cursive;
-    font-size:48px;
-
-    color:#743044;
-
-    margin-bottom:25px;
-
-    position:relative;
-}
-
-.monogram:before{
-    content:"";
-    position:absolute;
-    inset:7px;
-
-    border:1px solid rgba(185,139,82,.5);
-    border-radius:50%;
-}
-
-.family{
-    margin-top:35px;
-    font-size:18px;
-    line-height:1.5;
-}
-
-/* =========================================================
-   PROGRAMME
-========================================================= */
-
-.programme{
-    width:100%;
-    margin-top:5px;
-}
-
-.event{
-    width:100%;
-
-    display:grid;
-    grid-template-columns:55px 1fr;
-
-    align-items:center;
-
-    padding:14px 5px;
-
-    border-bottom:1px solid rgba(170,120,80,.35);
-
-    text-align:left;
-}
-
-.event:last-child{
-    border-bottom:0;
-}
-
-.event-icon{
-    width:42px;
-    height:42px;
-
-    border-radius:50%;
-
-    border:1px solid #bd925b;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    font-size:19px;
-
-    color:#8a552e;
-}
-
-.event-name{
-    font-family:"Bodoni Moda",serif;
-    font-size:21px;
-    color:#70273c;
-}
-
-.event-time{
-    font-size:16px;
-    color:#4e3439;
-}
-
-/* =========================================================
-   VENUE
-========================================================= */
-
-.venue-card{
-    width:100%;
-
-    margin-top:20px;
-
-    border:1px solid rgba(181,137,78,.5);
-
-    padding:20px 10px;
-
-    border-radius:12px;
-
-    background:rgba(255,248,243,.55);
-}
-
-.venue-name{
-    font-family:"Bodoni Moda",serif;
-    font-size:25px;
-    color:#6b273a;
-
-    margin-bottom:7px;
-}
-
-.map-button{
-    display:inline-block;
-
-    margin-top:25px;
-
-    padding:13px 28px;
-
-    border-radius:30px;
-
-    text-decoration:none;
-
-    background:#8e4055;
-    color:white;
-
-    font-family:"Montserrat",sans-serif;
-    font-size:10px;
-    letter-spacing:2px;
-
-    box-shadow:0 7px 18px rgba(100,40,55,.2);
-}
-
-/* =========================================================
-   COUNTDOWN
-========================================================= */
-
-.countdown{
-    width:100%;
-
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-
-    gap:7px;
-
-    margin-top:25px;
-}
-
-.count-box{
-    border:1px solid rgba(174,125,76,.45);
-    border-radius:50%;
-
-    aspect-ratio:1;
-
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-}
-
-.count-number{
-    font-family:"Bodoni Moda",serif;
-    font-size:22px;
-    color:#6f293c;
-}
-
-.count-label{
-    font-family:"Montserrat",sans-serif;
-    font-size:7px;
-    letter-spacing:1px;
-    text-transform:uppercase;
-}
-
-/* =========================================================
-   SCRATCH
-========================================================= */
-
-.scratch-wrapper{
-    position:relative;
-
-    width:100%;
-    max-width:260px;
-
-    aspect-ratio:2.3;
-
-    margin-top:25px;
-
-    border-radius:12px;
-
-    overflow:hidden;
-
-    border:1px solid #bb8b52;
-}
-
-.scratch-date{
-    position:absolute;
-    inset:0;
-
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-
-    background:#fff4ec;
-
-    color:#6b263a;
-}
-
-.scratch-date small{
-    font-family:"Montserrat",sans-serif;
-    letter-spacing:2px;
-    font-size:8px;
-}
-
-.scratch-date strong{
-    font-family:"Bodoni Moda",serif;
-    font-size:22px;
-    margin-top:5px;
-}
-
-#scratchCanvas{
-    position:absolute;
-    inset:0;
-
-    width:100%;
-    height:100%;
-
-    cursor:crosshair;
-}
-
-/* =========================================================
-   GRATITUDE
-========================================================= */
-
-.gratitude{
-    justify-content:center;
-}
-
-.signature{
-    font-family:"Italianno",cursive;
-    font-size:48px;
-    color:#6e273d;
-
-    margin-top:25px;
-}
-
-.heart{
-    color:#9a3b57;
-    font-size:25px;
-    margin-top:10px;
-}
-
-/* =========================================================
-   FINAL PANEL
-========================================================= */
-
-.final-panel{
-    justify-content:center;
-
-    background:
-        radial-gradient(circle at 50% 45%,rgba(255,255,255,.7),transparent 45%),
-        linear-gradient(160deg,#f4d8d7,#efd1d0);
-}
-
-.final-script{
-    font-family:"Italianno",cursive;
-    font-size:65px;
-    line-height:.9;
-    color:#69243a;
-}
-
-.final-small{
-    font-family:"Montserrat",sans-serif;
-    font-size:9px;
-    letter-spacing:3px;
-    line-height:2;
-
-    margin-top:30px;
-}
-
-/* =========================================================
-   MUSIC
-========================================================= */
-
-.music-btn{
-    position:fixed;
-
-    right:18px;
-    bottom:18px;
-
-    z-index:500;
-
-    width:48px;
-    height:48px;
-
-    border-radius:50%;
-
-    border:1px solid #b8884f;
-
-    background:#fff5ed;
-
-    color:#743044;
-
-    box-shadow:0 8px 25px rgba(60,30,30,.2);
-
-    cursor:pointer;
-}
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media(max-width:900px){
-
-    .invitation-grid{
-        grid-template-columns:repeat(2,1fr);
-        width:96vw;
-    }
-
-    .panel{
-        min-height:650px;
-        padding:42px 22px;
-    }
-
-    .names{
-        font-size:64px;
-    }
-}
-
-@media(max-width:600px){
-
-    body{
-        background:#ead0d2;
-    }
-
-    .invitation-grid{
-        display:flex;
-        flex-direction:column;
-
-        width:min(94vw,420px);
-
-        gap:15px;
-
-        margin:15px auto;
-    }
-
-    .panel{
-        min-height:680px;
-        width:100%;
-    }
-
-    .names{
-        font-size:72px;
-    }
-
-    .heading{
-        font-size:36px;
-    }
-
-    .final-script{
-        font-size:70px;
-    }
-}
-
 </style>
 </head>
 
 <body>
 
-<!-- =====================================================
-     OPENING
-===================================================== -->
+<main class="invitation-grid" id="invitationGrid">
 
-<section id="opening">
-
-    <div class="envelope-wrap">
-
-        <div class="envelope">
-
-            <div class="envelope-flap"></div>
-
-            <div class="seal">
-                <span>T&nbsp;A</span>
-            </div>
-
-        </div>
-
-        <div class="open-label">
-            Tap The Seal To Open
-        </div>
-
-        <div class="open-sub">
-            A Wedding Invitation
-        </div>
-
+  <!-- PANEL 1: ENVELOPE / OPEN -->
+  <section class="panel envelope-panel" id="openEnvelope" role="button" tabindex="0" aria-label="Tap to open the wedding invitation">
+    <div class="inner-frame"></div>
+    <div class="envelope-art"></div>
+    <div class="envelope-flap"></div>
+    <div class="envelope-seal">T&nbsp;A</div>
+    <span class="flower one">✿</span>
+    <span class="flower two">❀</span>
+    <div class="envelope-copy">
+      <div class="eyebrow">A Wedding Invitation</div>
+      <div class="tap-label">Tap to open</div>
+      <div class="tap-hand">♧</div>
     </div>
+  </section>
 
-</section>
-
-
-<!-- =====================================================
-     INVITATION
-===================================================== -->
-
-<main id="invitation">
-
-<div class="invitation-grid">
-
-
-<!-- =====================================================
-     PANEL 1 — OPENING
-===================================================== -->
-
-<section class="panel open-panel">
-
-    <div class="open-panel-content">
-
-        <div class="eyebrow">
-            A Wedding Invitation
-        </div>
-
-        <div class="open-label">
-            Welcome
-        </div>
-
-        <div class="open-sub">
-            A beautiful beginning awaits
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     PANEL 2 — HERO
-===================================================== -->
-
-<section class="panel hero">
-
-    <div class="flower tl">✿</div>
-    <div class="flower br">✿</div>
-
-    <div class="bismillah">
-        بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ
-    </div>
-
-    <div class="gold-line"></div>
-
-    <p class="eyebrow">
-        A New Chapter Unfolds
-    </p>
-
-    <p class="hero-small">
-        AS TWO SOULS UNITE<br>
-        IN NIKAH
-    </p>
-
+  <!-- PANEL 2: COUPLE -->
+  <section class="panel hero-panel locked">
+    <div class="inner-frame"></div>
+    <div class="arch"></div>
+    <span class="lantern left">♜</span>
+    <span class="lantern right">♜</span>
+    <span class="flower one">✿</span>
+    <span class="flower two">❀</span>
+    <span class="flower three">✿</span>
+    <div class="bismillah">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</div>
+    <div class="gold-divider"></div>
+    <div class="eyebrow">A new chapter unfolds</div>
+    <div class="eyebrow">As two souls unite in Nikah</div>
     <div class="names">
-        Tabinda
-        <div class="and">&amp;</div>
-        Adil
+      Tabinda
+      <span class="and">&amp;</span>
+      Adil
     </div>
-
-    <div class="gold-line"></div>
-
-    <div class="hero-bottom">
-
-        <p class="hero-small">
-            WITH THE BLESSINGS<br>
-            OF OUR FAMILIES
-        </p>
-
+    <div class="gold-divider"></div>
+    <div class="bottom-copy">
+      <div class="eyebrow">With the blessings</div>
+      <div class="eyebrow">of our families</div>
+      <p class="body-copy">We cordially invite you<br>to witness the union<br>of our youngest daughter</p>
     </div>
+  </section>
 
-</section>
-
-
-<!-- =====================================================
-     PANEL 3 — FAMILY
-===================================================== -->
-
-<section class="panel">
-
-    <div class="monogram">
-        T A
-    </div>
-
-    <p class="eyebrow">
-        With the blessings of our families
+  <!-- PANEL 3: FAMILY -->
+  <section class="panel family-panel locked">
+    <div class="inner-frame"></div>
+    <span class="flower one">✿</span>
+    <span class="flower four">❀</span>
+    <div class="monogram">T&nbsp;A</div>
+    <p class="body-copy">
+      Mrs. Farhana Khan<br>
+      Wife of (Late) Mr. Mujahid Hasan Khan
     </p>
+    <div class="gold-divider"></div>
+    <p class="body-copy">Cordially invites you to witness<br>the union of our youngest daughter</p>
+    <div class="person">Tabinda Khan</div>
+    <p class="body-copy">D/o (Late) Mr. Mujahid Hasan Khan</p>
+    <div class="with">With</div>
+    <div class="person groom">Mohd. Adil Kamaal</div>
+    <p class="body-copy">S/o Mr. &amp; Mrs. Khursheed Anwar</p>
+  </section>
 
-    <p class="body">
-        Mrs. Farhana Khan<br>
-        Wife of (Late) Mr. Mujahid Hasan Khan
-    </p>
-
-    <div class="gold-line"></div>
-
-    <p class="body">
-        Cordially invites you to witness
-        the union of our youngest daughter
-    </p>
-
-    <div class="script" style="font-size:50px;margin-top:15px;">
-        Tabinda Khan
-    </div>
-
-    <p class="body">
-        D/o (Late) Mr. Mujahid Hasan Khan
-    </p>
-
-    <div class="ornament">❧ ✦ ❧</div>
-
-    <div class="script" style="font-size:42px;">
-        With
-    </div>
-
-    <div class="script" style="font-size:48px;">
-        Mohd. Adil Kamaal
-    </div>
-
-    <p class="body">
-        S/o Mr. &amp; Mrs. Khursheed Anwar
-    </p>
-
-</section>
-
-
-<!-- =====================================================
-     PANEL 4 — PROGRAMME
-===================================================== -->
-
-<section class="panel">
-
-    <h2 class="heading">
-        Programme
-    </h2>
-
-    <div class="gold-line"></div>
-
-    <p class="body">
-        A beautiful evening of love,
-        duas and celebration
-    </p>
-
-    <div class="programme">
-
-        <div class="event">
-
-            <div class="event-icon">
-                ♡
-            </div>
-
-            <div>
-                <div class="event-name">
-                    Nikah
-                </div>
-
-                <div class="event-time">
-                    3:30 PM
-                </div>
-
-                <div class="body">
-                    Al-Madeena Masjid
-                </div>
-            </div>
-
+  <!-- PANEL 4: PROGRAMME -->
+  <section class="panel programme-panel locked">
+    <div class="inner-frame"></div>
+    <span class="flower one">✿</span>
+    <span class="flower four">❀</span>
+    <h2 class="heading">Programme</h2>
+    <div class="gold-divider"></div>
+    <div class="body-copy">A day of duas and celebration</div>
+    <div class="events">
+      <div class="event">
+        <div class="event-icon">♜</div>
+        <div>
+          <div class="event-title">Nikah</div>
+          <div class="event-detail">(At Al-Madeena Masjid)<br>3:30 PM</div>
         </div>
-
-
-        <div class="event">
-
-            <div class="event-icon">
-                ◇
-            </div>
-
-            <div>
-                <div class="event-name">
-                    Ruksati
-                </div>
-
-                <div class="event-time">
-                    After Magrib
-                </div>
-            </div>
-
+      </div>
+      <div class="event">
+        <div class="event-icon">♡</div>
+        <div>
+          <div class="event-title">Ruksati</div>
+          <div class="event-detail">After Magrib</div>
         </div>
-
-
-        <div class="event">
-
-            <div class="event-icon">
-                ◉
-            </div>
-
-            <div>
-                <div class="event-name">
-                    Dinner
-                </div>
-
-                <div class="event-time">
-                    7:30 PM
-                </div>
-            </div>
-
+      </div>
+      <div class="event">
+        <div class="event-icon">♧</div>
+        <div>
+          <div class="event-title">Dinner</div>
+          <div class="event-detail">7:30 PM</div>
         </div>
-
+      </div>
     </div>
-
-    <div style="margin-top:auto">
-
-        <div class="gold-line"></div>
-
-        <p class="eyebrow">
-            With love &amp; gratitude
-        </p>
-
+    <div class="venue-inset">
+      <div class="heading">Venue</div>
+      <div class="gold-divider"></div>
+      <div class="venue-name">Bandhan Marriage Hall</div>
+      <div class="body-copy">Civil Lines, Rampur (U.P.)</div>
     </div>
+  </section>
 
-</section>
-
-
-<!-- =====================================================
-     PANEL 5 — SCRATCH DATE
-===================================================== -->
-
-<section class="panel">
-
-    <h2 class="heading">
-        A Little Surprise
-    </h2>
-
-    <div class="gold-line"></div>
-
-    <p class="body">
-        Scratch below to reveal
-        the special day.
-    </p>
-
-    <div class="scratch-wrapper">
-
-        <div class="scratch-date">
-
-            <small>
-                OUR SPECIAL DAY
-            </small>
-
-            <strong id="revealedDate">
-            </strong>
-
-        </div>
-
-        <canvas id="scratchCanvas"></canvas>
-
+  <!-- PANEL 5: SCRATCH REVEAL -->
+  <section class="panel scratch-panel locked">
+    <div class="inner-frame"></div>
+    <div class="arch"></div>
+    <span class="lantern left">♜</span>
+    <span class="lantern right">♜</span>
+    <span class="flower two">❀</span>
+    <h2 class="heading">Save the Date</h2>
+    <div class="gold-divider"></div>
+    <div class="scratch-intro">The moments are<br>getting closer</div>
+    <div class="scratch-wrap">
+      <div class="scratch-under">
+        <small>OUR SPECIAL DAY</small>
+        <strong id="revealedDate"></strong>
+      </div>
+      <canvas id="scratchCanvas" aria-label="Scratch to reveal the wedding date"></canvas>
     </div>
+    <div class="scratch-hint">Scratch gently to reveal</div>
+    <svg class="mosque-art" viewBox="0 0 300 190" aria-hidden="true">
+      <g fill="#b88a70" stroke="#8f6657" stroke-width="1">
+        <path d="M35 175V118h25v57M240 175V118h25v57"/>
+        <path d="M28 118h39l-19-18zM233 118h39l-19-18z"/>
+        <path d="M75 175V125h150v50z"/>
+        <path d="M105 125q45-75 90 0z"/>
+        <path d="M135 175v-35q15-24 30 0v35z" fill="#f6dfc9"/>
+        <path d="M150 50v-20m-7 20h14l-7-12z"/>
+        <path d="M45 100V80m-7 20h14l-7-12zM255 100V80m-7 20h14l-7-12z"/>
+      </g>
+      <path d="M0 176h300" stroke="#b78a50" stroke-width="2"/>
+      <path d="M0 184h300" stroke="#d9b98d" stroke-width="1"/>
+    </svg>
+  </section>
 
-    <p class="eyebrow" style="margin-top:22px;">
-        Scratch gently with your finger
-    </p>
-
-</section>
-
-
-<!-- =====================================================
-     PANEL 6 — COUNTDOWN
-===================================================== -->
-
-<section class="panel" id="countdownPanel">
-
-    <h2 class="heading">
-        Save The Date
-    </h2>
-
-    <div class="gold-line"></div>
-
-    <p class="body">
-        The moments are getting closer
-    </p>
-
+  <!-- PANEL 6: COUNTDOWN -->
+  <section class="panel countdown-panel locked" id="countdownPanel">
+    <div class="inner-frame"></div>
+    <span class="flower one">✿</span>
+    <span class="flower four">❀</span>
+    <h2 class="heading">The Countdown</h2>
+    <div class="gold-divider"></div>
+    <div class="count-copy">Until our special day</div>
     <div class="countdown">
+      <div class="count-box"><span class="count-number" id="days">00</span><span class="count-label">Days</span></div>
+      <div class="count-box"><span class="count-number" id="hours">00</span><span class="count-label">Hours</span></div>
+      <div class="count-box"><span class="count-number" id="minutes">00</span><span class="count-label">Minutes</span></div>
+      <div class="count-box"><span class="count-number" id="seconds">00</span><span class="count-label">Seconds</span></div>
+    </div>
+    <svg class="mosque-art" viewBox="0 0 300 190" aria-hidden="true">
+      <g fill="#b98b75" stroke="#906858" stroke-width="1">
+        <path d="M25 178V75h20v103M255 178V75h20v103"/>
+        <path d="M19 75h32L35 55zM249 75h32l-16-20z"/>
+        <path d="M85 178V122h130v56z"/>
+        <path d="M105 122q45-88 90 0z"/>
+        <path d="M132 178v-32q18-28 36 0v32z" fill="#f9e6d5"/>
+        <path d="M35 55V25m-6 30h12l-6-12zM265 55V25m-6 30h12l-6-12z"/>
+        <path d="M150 42V20m-7 22h14l-7-12z"/>
+      </g>
+      <path d="M0 178h300" stroke="#b78a50" stroke-width="2"/>
+    </svg>
+  </section>
 
-        <div class="count-box">
-            <div class="count-number" id="days">00</div>
-            <div class="count-label">Days</div>
-        </div>
+  <!-- PANEL 7: VENUE -->
+  <section class="panel venue-panel locked">
+    <div class="inner-frame"></div>
+    <span class="flower one">✿</span>
+    <span class="flower four">❀</span>
+    <h2 class="heading">Venue</h2>
+    <div class="gold-divider"></div>
+    <div class="venue-name">Bandhan Marriage Hall</div>
+    <div class="body-copy">Civil Lines, Rampur (U.P.)</div>
 
-        <div class="count-box">
-            <div class="count-number" id="hours">00</div>
-            <div class="count-label">Hours</div>
-        </div>
-
-        <div class="count-box">
-            <div class="count-number" id="minutes">00</div>
-            <div class="count-label">Minutes</div>
-        </div>
-
-        <div class="count-box">
-            <div class="count-number" id="seconds">00</div>
-            <div class="count-label">Seconds</div>
-        </div>
-
+    <div class="venue-picture">
+      <svg viewBox="0 0 300 235" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <defs>
+          <linearGradient id="sky" x2="0" y2="1">
+            <stop stop-color="#342b43"/>
+            <stop offset="1" stop-color="#c58c82"/>
+          </linearGradient>
+          <linearGradient id="hall" x2="0" y2="1">
+            <stop stop-color="#f4d5ad"/>
+            <stop offset="1" stop-color="#98644d"/>
+          </linearGradient>
+        </defs>
+        <rect width="300" height="235" fill="url(#sky)"/>
+        <circle cx="235" cy="38" r="19" fill="#f6dfbd" opacity=".75"/>
+        <path d="M20 180V95h260v85z" fill="url(#hall)" stroke="#f3d4a7" stroke-width="3"/>
+        <path d="M5 95h290L150 52z" fill="#a96e59" stroke="#e9c18d" stroke-width="3"/>
+        <path d="M112 180v-55q38-54 76 0v55z" fill="#4a3345" stroke="#f4d7a8" stroke-width="4"/>
+        <path d="M128 180v-42q22-31 44 0v42z" fill="#d7a16e"/>
+        <g fill="#493244" stroke="#f3d2a0" stroke-width="3">
+          <path d="M36 180v-38q15-22 30 0v38z"/>
+          <path d="M234 180v-38q15-22 30 0v38z"/>
+        </g>
+        <path d="M0 190h300l-35 45H35z" fill="#d5a88f"/>
+        <path d="M0 207h300M0 221h300" stroke="#f4d5ae" opacity=".7"/>
+        <g fill="#f8d99e">
+          <circle cx="150" cy="116" r="4"/><circle cx="52" cy="132" r="3"/><circle cx="248" cy="132" r="3"/>
+        </g>
+      </svg>
     </div>
 
-    <div style="margin-top:auto">
+    <a class="map-button" href="https://www.google.com/maps/search/?api=1&query=Bandhan+Marriage+Hall+Civil+Lines+Rampur+Uttar+Pradesh" target="_blank" rel="noopener">⌖ &nbsp; VIEW LOCATION</a>
+    <div class="quote">Your presence will make<br>our celebration even more special.</div>
+  </section>
 
-        <div class="ornament">
-            ✦
-        </div>
+  <!-- PANEL 8: GRATITUDE -->
+  <section class="panel gratitude-panel locked">
+    <div class="inner-frame"></div>
+    <div class="arch"></div>
+    <span class="lantern left">♜</span>
+    <span class="lantern right">♜</span>
+    <span class="flower one">✿</span>
+    <span class="flower four">❀</span>
+    <h2 class="heading">With Love,<br>Duas &amp; Gratitude</h2>
+    <div class="gold-divider"></div>
+    <p class="body-copy">Your presence, prayers and<br>blessings mean the world to us.</p>
+    <p class="body-copy">We cannot wait to share<br>this beautiful day with you.</p>
+    <div class="signature">Tabinda &amp; Adil</div>
+    <div class="heart">♥</div>
+    <svg class="mosque-art" viewBox="0 0 300 155" aria-hidden="true">
+      <g fill="#c49a83" stroke="#9d735f" stroke-width="1">
+        <path d="M30 145V82h18v63M252 145V82h18v63"/>
+        <path d="M25 82h28L39 64zM247 82h28l-14-18z"/>
+        <path d="M75 145V105h150v40z"/>
+        <path d="M100 105q50-75 100 0z"/>
+        <path d="M132 145v-27q18-25 36 0v27z" fill="#f8e5d4"/>
+      </g>
+      <path d="M0 145h300" stroke="#b78a50"/>
+    </svg>
+  </section>
 
-        <p class="hero-small">
-            UNTIL TWO HEARTS<br>
-            BECOME ONE
-        </p>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     PANEL 7 — VENUE
-===================================================== -->
-
-<section class="panel">
-
-    <h2 class="heading">
-        Venue
-    </h2>
-
-    <div class="gold-line"></div>
-
-    <div class="venue-card">
-
-        <div class="venue-name">
-            Bandhan Marriage Hall
-        </div>
-
-        <p class="body">
-            Civil Lines,<br>
-            Rampur (U.P.)
-        </p>
-
-    </div>
-
-    <div class="ornament">
-        ✦
-    </div>
-
-    <p class="body">
-        Your presence will make
-        our celebration even more special.
-    </p>
-
-    <a
-        class="map-button"
-        href="https://www.google.com/maps/search/?api=1&query=Bandhan+Marriage+Hall+Civil+Lines+Rampur+Uttar+Pradesh"
-        target="_blank"
-    >
-        VIEW LOCATION
-    </a>
-
-</section>
-
-
-<!-- =====================================================
-     PANEL 8 — THANK YOU
-===================================================== -->
-
-<section class="panel gratitude">
-
-    <div class="flower tl">✿</div>
-    <div class="flower br">✿</div>
-
-    <p class="eyebrow">
-        With Love, Duas &amp; Gratitude
-    </p>
-
-    <div class="gold-line"></div>
-
-    <p class="body">
-        Your presence, prayers and blessings
-        mean the world to us.
-    </p>
-
-    <p class="body" style="margin-top:20px;">
-        We cannot wait to share
-        this beautiful day with you.
-    </p>
-
-    <div class="signature">
-        Tabinda &amp; Adil
-    </div>
-
-    <div class="heart">
-        ♥
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     PANEL 9 — FINAL
-===================================================== -->
-
-<section class="panel final-panel">
-
-    <div class="final-script">
-        Jazak<br>
-        Allah
-    </div>
-
-    <div class="gold-line"></div>
-
-    <p class="final-small">
-        FOR BEING A PART OF<br>
-        OUR SPECIAL JOURNEY
-    </p>
-
-    <div class="ornament" style="margin-top:35px;">
-        ❧ ✦ ❧
-    </div>
-
-</section>
-
-
-</div>
+  <!-- PANEL 9: CLOSING -->
+  <section class="panel final-panel locked">
+    <div class="inner-frame"></div>
+    <div class="arch"></div>
+    <span class="flower one">✿</span>
+    <span class="flower four">❀</span>
+    <div class="final-title">Jazak<br>Allah</div>
+    <div class="gold-divider"></div>
+    <div class="final-copy">For being a part of<br>our special journey</div>
+    <svg class="mosque-art" viewBox="0 0 300 190" aria-hidden="true">
+      <g fill="#c39a83" stroke="#936a5a" stroke-width="1">
+        <path d="M20 180V90h20v90M260 180V90h20v90"/>
+        <path d="M15 90h30L30 70zM255 90h30l-15-20z"/>
+        <path d="M70 180V125h160v55z"/>
+        <path d="M105 125q45-85 90 0z"/>
+        <path d="M132 180v-35q18-27 36 0v35z" fill="#f9e6d5"/>
+        <path d="M30 70V42m-6 28h12l-6-12zM270 70V42m-6 28h12l-6-12z"/>
+        <path d="M150 50V25m-7 25h14l-7-12z"/>
+      </g>
+      <path d="M0 180h300" stroke="#b78a50" stroke-width="2"/>
+    </svg>
+  </section>
 
 </main>
 
-
-<!-- =====================================================
-     MUSIC
-===================================================== -->
-
 <audio id="weddingMusic" loop preload="auto">
-    <source src="music.mp3" type="audio/mpeg">
+  <source src="music.mp3" type="audio/mpeg">
 </audio>
-
-<button class="music-btn" id="musicButton">
-    ♫
-</button>
-
+<button class="music-button" id="musicButton" aria-label="Pause or play music">♫</button>
 
 <script>
-
-/* =========================================================
-   OPEN INVITATION + MUSIC
-========================================================= */
-
-const opening = document.getElementById("opening");
-const invitation = document.getElementById("invitation");
+const openEnvelope = document.getElementById("openEnvelope");
+const lockedPanels = document.querySelectorAll(".panel.locked");
 const music = document.getElementById("weddingMusic");
 const musicButton = document.getElementById("musicButton");
 
-opening.addEventListener("click", async () => {
+async function openInvitation() {
+  lockedPanels.forEach(panel => panel.classList.remove("locked"));
+  openEnvelope.setAttribute("aria-label", "Invitation opened");
 
-    opening.classList.add("hidden");
-    invitation.classList.add("visible");
+  musicButton.style.display = "block";
+  try {
+    await music.play();
+    musicButton.textContent = "♫";
+  } catch (error) {
+    musicButton.textContent = "♪";
+  }
+}
 
-    try{
-        await music.play();
-        musicButton.innerHTML = "♫";
-    }catch(e){
-        console.log("Music requires another tap.");
-    }
-
+openEnvelope.addEventListener("click", openInvitation);
+openEnvelope.addEventListener("keydown", event => {
+  if (event.key === "Enter" || event.key === " ") {
+    event.preventDefault();
+    openInvitation();
+  }
 });
-
 
 musicButton.addEventListener("click", async () => {
-
-    if(music.paused){
-
-        await music.play();
-        musicButton.innerHTML = "♫";
-
-    }else{
-
-        music.pause();
-        musicButton.innerHTML = "♪";
-
+  if (music.paused) {
+    try {
+      await music.play();
+      musicButton.textContent = "♫";
+    } catch (error) {
+      musicButton.textContent = "♪";
     }
-
+  } else {
+    music.pause();
+    musicButton.textContent = "♪";
+  }
 });
 
-
-/* =========================================================
-   SECRET DATE
-   Date is constructed only after the scratch reveal.
-========================================================= */
-
-const secretDate =
-    new Date(2026, 9, 9, 0, 0, 0).getTime();
-
-
-/* =========================================================
-   SCRATCH CARD
-========================================================= */
+/* The date is formatted only after the scratch card is revealed. */
+const weddingTimestamp = new Date(2026, 9, 9, 0, 0, 0).getTime();
 
 const canvas = document.getElementById("scratchCanvas");
 const ctx = canvas.getContext("2d");
+let isScratching = false;
+let dateRevealed = false;
 
-function setupScratch(){
+function drawScratchCover() {
+  const rect = canvas.getBoundingClientRect();
+  const dpr = window.devicePixelRatio || 1;
 
-    const rect = canvas.getBoundingClientRect();
+  canvas.width = Math.round(rect.width * dpr);
+  canvas.height = Math.round(rect.height * dpr);
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-    canvas.width = rect.width * devicePixelRatio;
-    canvas.height = rect.height * devicePixelRatio;
+  const gradient = ctx.createLinearGradient(0, 0, rect.width, rect.height);
+  gradient.addColorStop(0, "#e2c49b");
+  gradient.addColorStop(.5, "#b88950");
+  gradient.addColorStop(1, "#d9b47a");
 
-    ctx.scale(devicePixelRatio,devicePixelRatio);
+  ctx.globalCompositeOperation = "source-over";
+  ctx.fillStyle = gradient;
+  ctx.fillRect(0, 0, rect.width, rect.height);
 
-    const width = rect.width;
-    const height = rect.height;
-
-    const gradient = ctx.createLinearGradient(
-        0,0,width,height
-    );
-
-    gradient.addColorStop(0,"#d9b889");
-    gradient.addColorStop(.5,"#b98b52");
-    gradient.addColorStop(1,"#d7b176");
-
-    ctx.fillStyle = gradient;
-    ctx.fillRect(0,0,width,height);
-
-    ctx.fillStyle = "rgba(255,255,255,.25)";
-
-    for(let i=0;i<20;i++){
-
-        ctx.beginPath();
-
-        ctx.arc(
-            Math.random()*width,
-            Math.random()*height,
-            Math.random()*3,
-            0,
-            Math.PI*2
-        );
-
-        ctx.fill();
-    }
-
-    ctx.fillStyle = "#fff9ef";
-    ctx.font = "12px Montserrat";
-    ctx.textAlign = "center";
-
-    ctx.fillText(
-        "SCRATCH TO REVEAL",
-        width/2,
-        height/2
-    );
-}
-
-setupScratch();
-
-
-let scratching = false;
-let revealed = false;
-
-
-function scratch(e){
-
-    if(revealed) return;
-
-    const rect = canvas.getBoundingClientRect();
-
-    let x;
-    let y;
-
-    if(e.touches){
-
-        x = e.touches[0].clientX - rect.left;
-        y = e.touches[0].clientY - rect.top;
-
-    }else{
-
-        x = e.clientX - rect.left;
-        y = e.clientY - rect.top;
-
-    }
-
-    ctx.globalCompositeOperation = "destination-out";
-
+  ctx.fillStyle = "rgba(255,255,255,.22)";
+  for (let i = 0; i < 35; i++) {
     ctx.beginPath();
-
-    ctx.arc(
-        x,
-        y,
-        25,
-        0,
-        Math.PI*2
-    );
-
+    ctx.arc(Math.random() * rect.width, Math.random() * rect.height, Math.random() * 2 + .5, 0, Math.PI * 2);
     ctx.fill();
+  }
 
-    checkScratch();
-
+  ctx.fillStyle = "#fff8ed";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.font = "10px Montserrat, sans-serif";
+  ctx.fillText("SCRATCH TO REVEAL", rect.width / 2, rect.height / 2);
 }
 
+function scratchAt(event) {
+  if (dateRevealed) return;
 
-function checkScratch(){
+  const rect = canvas.getBoundingClientRect();
+  const x = event.clientX - rect.left;
+  const y = event.clientY - rect.top;
 
-    const pixels = ctx.getImageData(
-        0,
-        0,
-        canvas.width,
-        canvas.height
-    ).data;
+  ctx.globalCompositeOperation = "destination-out";
+  ctx.beginPath();
+  ctx.arc(x, y, 23, 0, Math.PI * 2);
+  ctx.fill();
 
-    let transparent = 0;
-
-    for(let i=3;i<pixels.length;i+=4){
-
-        if(pixels[i] === 0){
-            transparent++;
-        }
-
-    }
-
-    const percentage =
-        transparent / (pixels.length/4);
-
-    if(percentage > .55){
-
-        revealDate();
-
-    }
-
+  checkScratchProgress();
 }
 
+function checkScratchProgress() {
+  const pixels = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+  let cleared = 0;
 
-function revealDate(){
+  for (let i = 3; i < pixels.length; i += 4) {
+    if (pixels[i] < 80) cleared++;
+  }
 
-    if(revealed) return;
-
-    revealed = true;
-
-    canvas.style.display = "none";
-
-    const formatted =
-        new Intl.DateTimeFormat(
-            "en-GB",
-            {
-                day:"2-digit",
-                month:"long",
-                year:"numeric"
-            }
-        ).format(secretDate);
-
-    document.getElementById("revealedDate").textContent =
-        formatted;
-
-    startCountdown();
-
+  if (cleared / (pixels.length / 4) > .48) {
+    revealWeddingDate();
+  }
 }
 
+function revealWeddingDate() {
+  if (dateRevealed) return;
+  dateRevealed = true;
 
-/* Mouse */
+  document.getElementById("revealedDate").textContent =
+    new Intl.DateTimeFormat("en-GB", {
+      day: "2-digit",
+      month: "long",
+      year: "numeric"
+    }).format(weddingTimestamp);
 
-canvas.addEventListener("mousedown",()=>{
-    scratching = true;
-});
-
-canvas.addEventListener("mouseup",()=>{
-    scratching = false;
-});
-
-canvas.addEventListener("mouseleave",()=>{
-    scratching = false;
-});
-
-canvas.addEventListener("mousemove",(e)=>{
-
-    if(scratching){
-        scratch(e);
-    }
-
-});
-
-
-/* Touch */
-
-canvas.addEventListener(
-    "touchstart",
-    e=>{
-        e.preventDefault();
-        scratching = true;
-        scratch(e);
-    },
-    {passive:false}
-);
-
-canvas.addEventListener(
-    "touchmove",
-    e=>{
-        e.preventDefault();
-
-        if(scratching){
-            scratch(e);
-        }
-
-    },
-    {passive:false}
-);
-
-canvas.addEventListener(
-    "touchend",
-    ()=>{
-        scratching = false;
-    }
-);
-
-
-/* =========================================================
-   COUNTDOWN
-========================================================= */
-
-const countdownPanel =
-    document.getElementById("countdownPanel");
-
-function startCountdown(){
-
-    function update(){
-
-        const now = Date.now();
-
-        const distance =
-            secretDate - now;
-
-        if(distance <= 0){
-
-            document.getElementById("days").textContent = "00";
-            document.getElementById("hours").textContent = "00";
-            document.getElementById("minutes").textContent = "00";
-            document.getElementById("seconds").textContent = "00";
-
-            return;
-        }
-
-        const days =
-            Math.floor(
-                distance /
-                (1000*60*60*24)
-            );
-
-        const hours =
-            Math.floor(
-                (distance /
-                (1000*60*60)) % 24
-            );
-
-        const minutes =
-            Math.floor(
-                (distance /
-                (1000*60)) % 60
-            );
-
-        const seconds =
-            Math.floor(
-                (distance /
-                1000) % 60
-            );
-
-        document.getElementById("days")
-            .textContent =
-            String(days).padStart(2,"0");
-
-        document.getElementById("hours")
-            .textContent =
-            String(hours).padStart(2,"0");
-
-        document.getElementById("minutes")
-            .textContent =
-            String(minutes).padStart(2,"0");
-
-        document.getElementById("seconds")
-            .textContent =
-            String(seconds).padStart(2,"0");
-
-    }
-
-    update();
-
-    setInterval(update,1000);
+  canvas.style.display = "none";
+  startCountdown();
 }
 
+canvas.addEventListener("pointerdown", event => {
+  isScratching = true;
+  canvas.setPointerCapture(event.pointerId);
+  scratchAt(event);
+});
+
+canvas.addEventListener("pointermove", event => {
+  if (isScratching) scratchAt(event);
+});
+
+canvas.addEventListener("pointerup", () => isScratching = false);
+canvas.addEventListener("pointercancel", () => isScratching = false);
+
+function startCountdown() {
+  function update() {
+    const remaining = weddingTimestamp - Date.now();
+    const values = {
+      days: Math.max(0, Math.floor(remaining / 86400000)),
+      hours: Math.max(0, Math.floor((remaining / 3600000) % 24)),
+      minutes: Math.max(0, Math.floor((remaining / 60000) % 60)),
+      seconds: Math.max(0, Math.floor((remaining / 1000) % 60))
+    };
+
+    Object.entries(values).forEach(([id, value]) => {
+      document.getElementById(id).textContent = String(value).padStart(2, "0");
+    });
+  }
+
+  update();
+  setInterval(update, 1000);
+}
+
+window.addEventListener("load", drawScratchCover);
+window.addEventListener("resize", () => {
+  if (!dateRevealed) drawScratchCover();
+});
 </script>
 
 </body>
