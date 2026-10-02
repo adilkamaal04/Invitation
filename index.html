@@ -11,31 +11,276 @@
 
 <style>
 :root {
-  --ink: #542333;
-  --wine: #762d43;
-  --pink: #d995a7;
-  --rose: #efc9ce;
-  --paper: #fff5f0;
-  --gold: #b78a50;
-  --gold-light: #dfc18d;
-  --line: rgba(183,138,80,.65);
+  --wine: #70283f;
+  --wine-dark: #512033;
+  --rose: #d58da0;
+  --pink: #f1cbd1;
+  --paper: #fff7f1;
+  --gold: #b68a51;
+  --gold-light: #e0c18b;
+  --text: #50363a;
 }
 
 * { box-sizing: border-box; }
 
-html { scroll-behaviour: smooth; }
+html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
-  color: var(--ink);
-  background:
-    radial-gradient(ellipse at 15% 10%, #fff9f5 0, transparent 35%),
-    radial-gradient(ellipse at 85% 90%, #e6bfc6 0, transparent 38%),
-    #e9cdd0;
+  color: var(--text);
   font-family: "Cormorant Garamond", serif;
+  background:
+    radial-gradient(ellipse at 12% 8%, #fffaf6, transparent 35%),
+    radial-gradient(ellipse at 90% 90%, #e7bdc7, transparent 38%),
+    #ecd2d4;
 }
 
 button { font: inherit; }
+
+/* ---------- FLORAL DECORATIONS ---------- */
+
+.flower-corner {
+  position: absolute;
+  width: 125px;
+  height: 145px;
+  z-index: 1;
+  pointer-events: none;
+  opacity: .88;
+}
+
+.flower-corner svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.flower-top-left { top: 0; left: 0; }
+.flower-top-right { top: 0; right: 0; transform: scaleX(-1); }
+.flower-bottom-left { bottom: 0; left: 0; transform: scaleY(-1); }
+.flower-bottom-right { bottom: 0; right: 0; transform: scale(-1); }
+
+.flower-corner.small {
+  width: 85px;
+  height: 100px;
+  opacity: .68;
+}
+
+.flower-petal { fill: #d78da1; }
+.flower-petal-light { fill: #f1c4ce; }
+.flower-centre { fill: #d6a65e; }
+.flower-leaf { fill: #84916b; }
+.flower-stem {
+  fill: none;
+  stroke: #89916b;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+.flower-vein {
+  fill: none;
+  stroke: #b7a06e;
+  stroke-width: 1;
+}
+
+/* ---------- OPENING ENVELOPE ---------- */
+
+#opening {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(255,255,255,.5), transparent 28%),
+    radial-gradient(circle at 85% 80%, rgba(255,226,226,.28), transparent 30%),
+    linear-gradient(135deg, #caa795, #ead0c3 48%, #b88e80);
+  transition: opacity .8s ease, visibility .8s ease;
+}
+
+#opening.dismissed {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.opening-flower {
+  position: absolute;
+  color: rgba(255,239,224,.72);
+  font-size: clamp(40px, 7vw, 85px);
+  pointer-events: none;
+  text-shadow: 0 5px 18px rgba(86,48,38,.15);
+}
+.opening-flower.f1 { left: 3%; bottom: 10%; }
+.opening-flower.f2 { right: 5%; top: 12%; font-size: 55px; }
+.opening-flower.f3 { right: 12%; bottom: 8%; font-size: 36px; }
+
+.envelope-area {
+  width: min(86vw, 440px);
+  text-align: center;
+  perspective: 1100px;
+}
+
+.envelope {
+  width: 100%;
+  aspect-ratio: 1.38;
+  position: relative;
+  border-radius: 15px;
+  overflow: visible;
+  cursor: pointer;
+  filter: drop-shadow(0 25px 28px rgba(67,37,30,.28));
+}
+
+.envelope-back {
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(105,68,52,.55);
+  border-radius: 15px;
+  background: linear-gradient(145deg, #e9d0bf, #c9a18e);
+  overflow: hidden;
+}
+
+.envelope-back::before,
+.envelope-back::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(145deg, transparent 49.6%, rgba(112,75,57,.28) 50%, transparent 50.5%);
+}
+
+.envelope-back::after {
+  background: linear-gradient(215deg, transparent 49.6%, rgba(112,75,57,.25) 50%, transparent 50.5%);
+}
+
+.envelope-paper {
+  position: absolute;
+  z-index: 1;
+  left: 8%;
+  right: 8%;
+  top: 8%;
+  height: 82%;
+  border-radius: 8px;
+  background: linear-gradient(145deg, #fff8f0, #f2ded4);
+  box-shadow: 0 3px 12px rgba(75,44,34,.16);
+  transition: transform 1s cubic-bezier(.2,.75,.25,1);
+}
+
+.envelope-paper::before {
+  content: "T  A";
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: #8a5d4b;
+  font: 42px "Italianno", cursive;
+  opacity: .75;
+}
+
+.envelope-front {
+  position: absolute;
+  z-index: 3;
+  inset: 0;
+  border-radius: 15px;
+  overflow: hidden;
+  background:
+    linear-gradient(145deg, transparent 49.7%, rgba(120,79,59,.20) 50%, transparent 50.5%),
+    linear-gradient(215deg, transparent 49.7%, rgba(120,79,59,.18) 50%, transparent 50.5%);
+  pointer-events: none;
+}
+
+.envelope-front::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(145deg, #f0ddce, #c9a18b);
+  clip-path: polygon(0 0, 50% 55%, 100% 0, 100% 100%, 0 100%);
+  opacity: .95;
+}
+
+.envelope-flap {
+  position: absolute;
+  z-index: 5;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 62%;
+  background: linear-gradient(145deg, #f4e0d2, #c9a08a);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transform-origin: top center;
+  transform: rotateX(0deg);
+  transition: transform 1.05s cubic-bezier(.3,.7,.2,1);
+  backface-visibility: visible;
+  filter: drop-shadow(0 4px 4px rgba(74,43,34,.17));
+}
+
+.envelope-seal {
+  position: absolute;
+  z-index: 7;
+  left: 50%;
+  top: 53%;
+  transform: translate(-50%,-50%);
+  width: clamp(72px, 19vw, 100px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: #fff1d2;
+  font: 42px "Italianno", cursive;
+  background: radial-gradient(circle at 35% 28%, #d8ae68, #a66e35 70%, #75491f);
+  border: 4px double #f1d49b;
+  box-shadow: 0 7px 18px rgba(62,34,22,.38), inset 0 2px 6px rgba(255,235,190,.5);
+  transition: opacity .35s ease, transform .7s ease;
+}
+
+.envelope.opened .envelope-flap {
+  transform: rotateX(180deg);
+}
+
+.envelope.opened .envelope-seal {
+  opacity: 0;
+  transform: translate(-50%,-50%) scale(.7);
+}
+
+.envelope.opened .envelope-paper {
+  transform: translateY(-34%);
+}
+
+.opening-label {
+  margin-top: 30px;
+  color: #fff9ef;
+  font: 300 11px "Montserrat", sans-serif;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  text-shadow: 0 2px 5px rgba(65,35,28,.25);
+}
+
+.opening-subtitle {
+  margin-top: 10px;
+  color: #fff4e9;
+  font: 400 17px "Cormorant Garamond", serif;
+  letter-spacing: 2px;
+}
+
+.tap-icon {
+  margin-top: 13px;
+  color: #fff4e9;
+  font-size: 27px;
+}
+
+/* ---------- INVITATION GRID ---------- */
+
+#invitation {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(14px);
+  transition: opacity .8s ease, transform .8s ease, visibility .8s ease;
+}
+
+#invitation.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
 
 .invitation-grid {
   width: min(1600px, 98vw);
@@ -45,47 +290,41 @@ button { font: inherit; }
   gap: 12px;
 }
 
-/* Every invitation panel */
 .panel {
-  min-width: 0;
-  min-height: 730px;
   position: relative;
   isolation: isolate;
+  min-width: 0;
+  min-height: 730px;
+  padding: 45px 24px 38px;
   overflow: hidden;
-  padding: 44px 24px 38px;
-  border: 1px solid rgba(135,91,62,.62);
+  border: 1px solid rgba(146,99,66,.62);
   border-radius: 17px;
-  text-align: center;
+  background:
+    radial-gradient(circle at 12% 10%, rgba(255,255,255,.9), transparent 27%),
+    radial-gradient(circle at 88% 88%, rgba(225,160,175,.20), transparent 34%),
+    linear-gradient(145deg, #fff8f3, #f8e6e4 65%, #f3dddc);
+  box-shadow: 0 8px 25px rgba(81,43,46,.13), inset 0 0 0 3px rgba(255,255,255,.35);
   display: flex;
   flex-direction: column;
   align-items: center;
-  background:
-    radial-gradient(circle at 10% 12%, rgba(255,255,255,.9), transparent 25%),
-    radial-gradient(circle at 90% 88%, rgba(222,160,172,.20), transparent 32%),
-    linear-gradient(145deg, #fff8f3, #f8e7e5 65%, #f4dedc);
-  box-shadow:
-    0 8px 25px rgba(81,43,46,.13),
-    inset 0 0 0 3px rgba(255,255,255,.35);
+  text-align: center;
 }
 
-/* Fine gold corner lines */
 .panel::before,
 .panel::after {
   content: "";
   position: absolute;
+  z-index: -1;
   width: 38px;
   height: 38px;
-  z-index: -1;
   pointer-events: none;
 }
-
 .panel::before {
   top: 10px;
   left: 10px;
   border-top: 1px solid var(--gold);
   border-left: 1px solid var(--gold);
 }
-
 .panel::after {
   right: 10px;
   bottom: 10px;
@@ -95,51 +334,43 @@ button { font: inherit; }
 
 .inner-frame {
   position: absolute;
+  z-index: -1;
   inset: 15px;
-  border: 1px solid rgba(183,138,80,.28);
+  border: 1px solid rgba(183,138,80,.25);
   border-radius: 11px;
   pointer-events: none;
-  z-index: -1;
 }
 
 .eyebrow {
+  color: #80545d;
   font: 300 9px/1.9 "Montserrat", sans-serif;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: #80535b;
 }
 
 .heading {
   margin: 0;
-  font: 400 clamp(34px, 3vw, 45px)/1.05 "Italianno", cursive;
   color: var(--wine);
-}
-
-.script {
-  font-family: "Italianno", cursive;
-  color: var(--wine);
-  font-weight: 400;
+  font: 400 clamp(35px, 3vw, 47px)/1.05 "Italianno", cursive;
 }
 
 .body-copy {
-  font-size: 17px;
-  line-height: 1.45;
-  color: #4d3438;
+  color: #50363a;
+  font: 400 17px/1.45 "Cormorant Garamond", serif;
 }
 
 .gold-divider {
-  width: 88px;
+  position: relative;
+  width: 90px;
   height: 1px;
   margin: 17px auto;
   background: linear-gradient(90deg, transparent, var(--gold), transparent);
-  position: relative;
 }
-
 .gold-divider::after {
   content: "✧";
   position: absolute;
-  left: 50%;
   top: 50%;
+  left: 50%;
   transform: translate(-50%,-55%);
   padding: 0 7px;
   background: #f9e9e6;
@@ -147,186 +378,89 @@ button { font: inherit; }
   font-size: 16px;
 }
 
-.flower {
-  position: absolute;
-  color: #cf8296;
-  opacity: .8;
-  font-size: 42px;
-  line-height: 1;
-  text-shadow: 0 2px 5px rgba(125,49,72,.12);
-  pointer-events: none;
-}
-
-.flower.one { top: 14px; left: 12px; }
-.flower.two { top: 36%; right: 8px; font-size: 28px; }
-.flower.three { bottom: 13px; left: 10px; font-size: 48px; }
-.flower.four { bottom: 18px; right: 12px; font-size: 37px; }
-
-.leaf {
-  position: absolute;
-  color: #8d9b69;
-  opacity: .65;
-  font-size: 26px;
-  pointer-events: none;
-}
-
-/* Decorative arch */
 .arch {
   position: absolute;
   z-index: -1;
   width: 82%;
-  height: 44%;
+  height: 43%;
   top: 7%;
   left: 9%;
-  border: 1px solid rgba(183,138,80,.65);
+  border: 1px solid rgba(183,138,80,.62);
   border-bottom: 0;
   border-radius: 48% 48% 0 0 / 35% 35% 0 0;
-  box-shadow: 0 0 0 5px rgba(255,255,255,.15);
+  box-shadow: 0 0 0 5px rgba(255,255,255,.13);
 }
 
-/* ---------- 1. Envelope panel ---------- */
-.envelope-panel {
-  padding: 0;
-  min-height: 730px;
-  justify-content: flex-end;
-  cursor: pointer;
-  color: #fff8ed;
-  background:
-    radial-gradient(ellipse at 25% 17%, rgba(255,245,226,.38), transparent 30%),
-    linear-gradient(145deg, #b18a78, #dfc0ad 48%, #a17b6a);
-}
-
-.envelope-panel::before,
-.envelope-panel::after {
-  border-color: rgba(255,242,215,.7);
-}
-
-.envelope-panel .inner-frame { border-color: rgba(255,242,215,.3); }
-
-.envelope-art {
-  position: absolute;
-  inset: 8% 0 27%;
-  background:
-    linear-gradient(145deg, transparent 49.7%, rgba(105,70,56,.3) 50%, transparent 50.5%),
-    linear-gradient(215deg, transparent 49.7%, rgba(105,70,56,.25) 50%, transparent 50.5%),
-    linear-gradient(145deg, #f0d9c7, #c9a894);
-  clip-path: polygon(0 0,100% 0,100% 100%,0 100%);
-  border-bottom: 1px solid rgba(91,57,44,.4);
-}
-
-.envelope-flap {
-  position: absolute;
-  top: 8%;
-  left: 0;
-  width: 100%;
-  height: 39%;
-  background: linear-gradient(145deg, #f1ddcf, #c9a38e);
-  clip-path: polygon(0 0,100% 0,50% 100%);
-  filter: drop-shadow(0 5px 5px rgba(65,39,32,.2));
-}
-
-.envelope-seal {
-  position: absolute;
-  top: 49%;
-  left: 50%;
-  transform: translate(-50%,-50%);
-  width: 88px;
-  height: 88px;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  color: #fff0d1;
-  font: 400 40px "Italianno", cursive;
-  background: radial-gradient(circle at 35% 30%, #d8ad66, #99652f 72%, #74451f);
-  border: 4px double #f0d5a0;
-  box-shadow: 0 7px 18px rgba(55,31,20,.38), inset 0 2px 5px #f8dca2;
-}
-
-.envelope-copy {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  padding: 30px 12px 38px;
-  background: linear-gradient(transparent, rgba(61,35,29,.38));
-}
-
-.envelope-copy .eyebrow { color: #fff8ed; }
-.tap-label {
-  margin-top: 13px;
-  font: 300 10px "Montserrat", sans-serif;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-}
-.tap-hand { font-size: 28px; margin-top: 10px; }
-
-/* ---------- 2. Names / hero ---------- */
-.hero-panel { justify-content: flex-start; }
-.hero-panel .bismillah {
-  margin: 105px 0 26px;
-  font: 400 31px "Amiri", serif;
-  color: #68283d;
-}
-.hero-panel .names {
-  margin: 32px 0 24px;
-  font: 400 clamp(65px, 6vw, 84px)/.78 "Italianno", cursive;
-  color: #67263b;
-}
-.hero-panel .and {
-  display: block;
-  margin: 15px 0;
-  font: italic 30px "Cormorant Garamond", serif;
-  color: var(--gold);
-}
-.hero-panel .bottom-copy { margin-top: auto; padding-bottom: 18px; }
-
-/* Hanging lantern ornaments */
 .lantern {
   position: absolute;
-  top: 7%;
+  top: 8%;
   color: #b77e38;
-  font-size: 31px;
+  font-size: 29px;
   filter: drop-shadow(0 3px 3px rgba(91,49,25,.2));
 }
 .lantern.left { left: 7%; }
 .lantern.right { right: 7%; top: 13%; }
 
-/* ---------- 3. Family panel ---------- */
+/* ---------- HERO PANEL ---------- */
+
+.hero-panel { justify-content: flex-start; }
+
+.hero-panel .bismillah {
+  margin: 105px 0 25px;
+  color: #68283d;
+  font: 400 31px "Amiri", serif;
+}
+
+.hero-names {
+  margin: 31px 0 23px;
+  color: #67263b;
+  font: 400 clamp(68px, 6vw, 86px)/.78 "Italianno", cursive;
+}
+.hero-names .and {
+  display: block;
+  margin: 15px 0;
+  color: var(--gold);
+  font: italic 30px "Cormorant Garamond", serif;
+}
+.hero-bottom { margin-top: auto; padding-bottom: 15px; }
+
+/* ---------- FAMILY PANEL ---------- */
+
 .monogram {
   width: 100px;
   height: 100px;
-  margin: 28px 0 35px;
+  margin: 25px 0 32px;
   border: 1px solid var(--gold);
-  outline: 1px solid rgba(183,138,80,.45);
+  outline: 1px solid rgba(183,138,80,.42);
   outline-offset: 5px;
   border-radius: 50%;
   display: grid;
   place-items: center;
+  color: var(--wine);
   font: 400 49px "Italianno", cursive;
-  color: var(--wine);
-}
-.family-panel .body-copy { margin: 0; }
-.family-panel .person {
-  margin: 20px 0 5px;
-  font: 400 51px/.95 "Italianno", cursive;
-  color: var(--wine);
-}
-.family-panel .with {
-  margin: 18px 0 8px;
-  font: 400 28px "Italianno", cursive;
-  color: var(--gold);
-}
-.family-panel .groom {
-  font-size: 43px;
-  margin-top: 18px;
 }
 
-/* ---------- 4. Programme panel ---------- */
+.family-panel .person {
+  margin: 19px 0 5px;
+  color: var(--wine);
+  font: 400 49px/.95 "Italianno", cursive;
+}
+.family-panel .with {
+  margin: 16px 0 6px;
+  color: var(--gold);
+  font: 400 28px "Italianno", cursive;
+}
+.family-panel .groom { font-size: 43px; }
+
+/* ---------- PROGRAMME ---------- */
+
 .programme-panel { padding-left: 18px; padding-right: 18px; }
-.programme-panel .heading { margin-top: 20px; }
+.programme-panel .heading { margin-top: 17px; }
+
 .events {
-  width: 100%;
-  margin-top: 18px;
   position: relative;
+  width: 100%;
+  margin-top: 15px;
 }
 .events::before {
   content: "";
@@ -337,57 +471,59 @@ button { font: inherit; }
   width: 1px;
   background: var(--gold);
 }
+
 .event {
   position: relative;
   display: grid;
   grid-template-columns: 56px 1fr;
   align-items: center;
   gap: 8px;
-  min-height: 100px;
-  margin: 15px 0;
-  padding: 10px 8px;
+  min-height: 96px;
+  margin: 14px 0;
+  padding: 9px 7px;
   border: 1px solid rgba(183,138,80,.65);
   border-radius: 12px;
-  background: rgba(255,250,245,.45);
+  background: rgba(255,250,245,.48);
   text-align: left;
 }
 .event-icon {
   z-index: 1;
-  width: 54px;
-  height: 54px;
-  border-radius: 50%;
+  width: 53px;
+  height: 53px;
   border: 1px solid var(--gold);
+  border-radius: 50%;
   background: #fff4ec;
   display: grid;
   place-items: center;
   color: #9b682f;
-  font-size: 25px;
+  font-size: 24px;
 }
 .event-title {
-  font: 400 25px/1.1 "Bodoni Moda", serif;
   color: var(--wine);
+  font: 400 24px/1.1 "Bodoni Moda", serif;
 }
 .event-detail { font-size: 17px; line-height: 1.35; }
 
-/* Venue inset */
 .venue-inset {
-  margin-top: auto;
   width: 100%;
-  padding: 20px 8px;
+  margin-top: auto;
+  padding: 18px 8px;
   border: 1px solid var(--gold);
   border-radius: 12px;
   background: rgba(255,247,241,.5);
 }
 .venue-inset .heading { font-size: 35px; }
 .venue-name {
-  margin: 12px 0 4px;
+  margin: 10px 0 4px;
+  color: var(--wine);
   font: 400 21px/1.2 "Bodoni Moda", serif;
 }
 
-/* ---------- 5. Scratch panel ---------- */
+/* ---------- SCRATCH DATE ---------- */
+
 .scratch-panel { justify-content: flex-start; }
 .scratch-panel .heading { margin-top: 135px; }
-.scratch-panel .scratch-intro {
+.scratch-intro {
   margin-top: 18px;
   font: 300 9px/2 "Montserrat", sans-serif;
   letter-spacing: 3px;
@@ -397,10 +533,10 @@ button { font: inherit; }
   position: relative;
   width: min(100%, 270px);
   height: 115px;
-  margin: 34px auto 12px;
+  margin: 32px auto 12px;
+  overflow: hidden;
   border: 1px solid var(--gold);
   border-radius: 13px;
-  overflow: hidden;
   background: #fff5ef;
 }
 .scratch-under {
@@ -429,22 +565,17 @@ button { font: inherit; }
   cursor: crosshair;
 }
 .scratch-hint {
+  margin-top: 12px;
   font: 300 9px/2 "Montserrat", sans-serif;
   letter-spacing: 2px;
   text-transform: uppercase;
-  margin-top: 12px;
-}
-.mosque-art {
-  width: 100%;
-  max-width: 300px;
-  margin-top: auto;
-  opacity: .9;
 }
 
-/* ---------- 6. Countdown panel ---------- */
+/* ---------- COUNTDOWN ---------- */
+
 .countdown-panel { justify-content: flex-start; }
-.countdown-panel .heading { margin-top: 145px; }
-.countdown-panel .count-copy {
+.countdown-panel .heading { margin-top: 140px; }
+.count-copy {
   margin-top: 18px;
   font: 300 9px/2 "Montserrat", sans-serif;
   letter-spacing: 3px;
@@ -464,131 +595,149 @@ button { font: inherit; }
   background: rgba(255,250,245,.48);
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 }
-.count-number { font: 400 23px "Bodoni Moda", serif; }
+.count-number { font: 400 22px "Bodoni Moda", serif; }
 .count-label {
   margin-top: 3px;
   font: 300 7px "Montserrat", sans-serif;
   letter-spacing: 1px;
+  text-transform: uppercase;
 }
-.countdown-panel .mosque-art { margin-top: auto; }
 
-/* ---------- 7. Venue panel ---------- */
-.venue-panel { justify-content: flex-start; }
-.venue-panel .heading { margin-top: 15px; }
-.venue-panel .venue-name { margin-top: 20px; font-size: 23px; }
+/* ---------- VENUE PANEL ---------- */
+
+.venue-panel .heading { margin-top: 12px; }
+.venue-panel .venue-name { margin-top: 18px; font-size: 22px; }
+
 .venue-picture {
   width: 100%;
-  height: 235px;
-  margin: 26px 0 16px;
+  height: 230px;
+  margin: 25px 0 15px;
   overflow: hidden;
   border: 5px solid #fff6ee;
   outline: 1px solid var(--gold);
-  background:
-    linear-gradient(to top, rgba(70,35,38,.2), transparent 55%),
-    radial-gradient(ellipse at 50% 75%, #eac6a1 0 10%, transparent 11%),
-    linear-gradient(180deg,#3b2d43,#9b6c76 55%,#d6a98e);
-  position: relative;
+  background: linear-gradient(#403349, #bd8b85);
 }
 .venue-picture svg { width: 100%; height: 100%; display: block; }
+
 .map-button {
   display: inline-block;
-  margin-top: 18px;
+  margin-top: 16px;
   padding: 13px 25px;
-  border-radius: 30px;
-  background: linear-gradient(100deg,#8b3d54,#a64c62);
   border: 1px solid #e3bd91;
+  border-radius: 30px;
   color: white;
+  background: linear-gradient(100deg,#873b52,#a64c62);
   text-decoration: none;
   font: 300 9px "Montserrat", sans-serif;
   letter-spacing: 3px;
   box-shadow: 0 5px 15px rgba(91,35,55,.18);
 }
-.venue-panel .quote {
+.quote {
   margin-top: auto;
   font: 300 9px/2 "Montserrat", sans-serif;
   letter-spacing: 2px;
   text-transform: uppercase;
 }
 
-/* ---------- 8. Gratitude panel ---------- */
-.gratitude-panel { justify-content: flex-start; }
-.gratitude-panel .heading { margin-top: 145px; }
-.gratitude-panel .body-copy { margin-top: 24px; }
-.gratitude-panel .signature {
-  margin-top: 45px;
-  font: 400 53px "Italianno", cursive;
-  color: var(--wine);
-}
-.heart { color: #a43e5b; font-size: 24px; margin-top: 8px; }
-.gratitude-panel .mosque-art { margin-top: auto; }
+/* ---------- GRATITUDE / CLOSING ---------- */
 
-/* ---------- 9. Final panel ---------- */
+.gratitude-panel { justify-content: flex-start; }
+.gratitude-panel .heading { margin-top: 140px; }
+.gratitude-panel .body-copy { margin-top: 22px; }
+.signature {
+  margin-top: 38px;
+  color: var(--wine);
+  font: 400 52px "Italianno", cursive;
+}
+.heart { margin-top: 8px; color: #a43e5b; font-size: 24px; }
+
 .final-panel {
   justify-content: center;
   background:
     radial-gradient(ellipse at 50% 45%, rgba(255,255,255,.8), transparent 48%),
     linear-gradient(150deg,#f7e4e1,#eecdd0);
 }
-.final-panel .final-title {
-  font: 400 clamp(60px, 6vw, 82px)/.82 "Italianno", cursive;
+.final-title {
   color: var(--wine);
+  font: 400 clamp(65px, 6vw, 85px)/.82 "Italianno", cursive;
 }
-.final-panel .final-copy {
+.final-copy {
   margin-top: 28px;
   font: 300 9px/2 "Montserrat", sans-serif;
   letter-spacing: 3px;
   text-transform: uppercase;
 }
-.final-panel .mosque-art { margin-top: 55px; }
 
-/* Panels are revealed when the envelope is opened */
-.panel.locked { display: none; }
+/* ---------- DECORATIVE MOSQUE ---------- */
+
+.mosque-art {
+  width: 100%;
+  max-width: 300px;
+  margin-top: auto;
+  opacity: .9;
+}
+
+/* ---------- MUSIC BUTTON ---------- */
 
 .music-button {
   position: fixed;
-  z-index: 20;
+  z-index: 30;
   right: 18px;
   bottom: 18px;
   width: 48px;
   height: 48px;
+  display: none;
   border: 1px solid var(--gold);
   border-radius: 50%;
   color: var(--wine);
   background: #fff7ef;
   box-shadow: 0 5px 18px rgba(67,35,39,.2);
   cursor: pointer;
-  display: none;
 }
 
+/* ---------- RESPONSIVE LAYOUT ---------- */
+
 @media (max-width: 1050px) {
-  .invitation-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
-  .panel { min-height: 690px; }
+  .invitation-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .panel { min-height: 700px; }
 }
 
 @media (max-width: 600px) {
   .invitation-grid {
-    width: min(94vw, 420px);
+    width: min(94vw, 430px);
     display: flex;
     flex-direction: column;
     gap: 14px;
     margin: 12px auto;
   }
-  .panel { min-height: 690px; padding-left: 28px; padding-right: 28px; }
-  .envelope-panel { padding: 0; }
-  .hero-panel .names { font-size: 82px; }
-  .family-panel .person { font-size: 56px; }
+
+  .panel {
+    min-height: 690px;
+    padding-left: 28px;
+    padding-right: 28px;
+  }
+
+  .hero-panel .hero-names { font-size: 82px; }
+  .family-panel .person { font-size: 55px; }
+  .family-panel .groom { font-size: 45px; }
   .programme-panel { padding-left: 22px; padding-right: 22px; }
-  .final-panel .final-title { font-size: 76px; }
+  .final-title { font-size: 78px; }
+  .flower-corner { width: 105px; height: 125px; }
+  .flower-corner.small { width: 75px; height: 90px; }
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .envelope-seal { animation: sealGlow 3s ease-in-out infinite; }
+  .envelope-seal {
+    animation: sealGlow 3s ease-in-out infinite;
+  }
   @keyframes sealGlow {
-    0%,100% { box-shadow: 0 7px 18px rgba(55,31,20,.38), inset 0 2px 5px #f8dca2; }
-    50% { box-shadow: 0 7px 24px rgba(55,31,20,.45), 0 0 18px rgba(255,221,157,.5), inset 0 2px 5px #f8dca2; }
+    0%,100% { box-shadow: 0 7px 18px rgba(62,34,22,.38), inset 0 2px 6px rgba(255,235,190,.5); }
+    50% { box-shadow: 0 7px 25px rgba(62,34,22,.42), 0 0 18px rgba(255,221,157,.5), inset 0 2px 6px rgba(255,235,190,.5); }
   }
 }
 </style>
@@ -596,261 +745,301 @@ button { font: inherit; }
 
 <body>
 
-<main class="invitation-grid" id="invitationGrid">
+<!-- Reusable floral SVG -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="floral" viewBox="0 0 130 150">
+    <path class="flower-stem" d="M4 145 C28 110 26 75 57 42 C75 22 91 18 112 4"/>
+    <path class="flower-stem" d="M30 111 C12 91 13 75 8 65 M49 70 C70 70 80 82 83 96"/>
+    <path class="flower-vein" d="M20 91 Q10 76 8 65 M50 70 Q68 68 83 96"/>
+    <path class="flower-leaf" d="M23 105 Q3 91 5 75 Q23 78 31 98 Q29 105 23 105Z"/>
+    <path class="flower-leaf" d="M55 77 Q66 58 83 61 Q80 79 59 84Z"/>
+    <g transform="translate(91 26)">
+      <ellipse class="flower-petal" cx="0" cy="-13" rx="8" ry="14"/>
+      <ellipse class="flower-petal-light" cx="12" cy="-4" rx="8" ry="14" transform="rotate(72 12 -4)"/>
+      <ellipse class="flower-petal" cx="8" cy="11" rx="8" ry="14" transform="rotate(144 8 11)"/>
+      <ellipse class="flower-petal-light" cx="-8" cy="11" rx="8" ry="14" transform="rotate(216 -8 11)"/>
+      <ellipse class="flower-petal" cx="-12" cy="-4" rx="8" ry="14" transform="rotate(288 -12 -4)"/>
+      <circle class="flower-centre" r="5"/>
+    </g>
+    <g transform="translate(28 120) scale(.65)">
+      <ellipse class="flower-petal-light" cx="0" cy="-10" rx="7" ry="11"/>
+      <ellipse class="flower-petal" cx="10" cy="0" rx="7" ry="11" transform="rotate(72 10 0)"/>
+      <ellipse class="flower-petal-light" cx="6" cy="10" rx="7" ry="11" transform="rotate(144 6 10)"/>
+      <ellipse class="flower-petal" cx="-6" cy="10" rx="7" ry="11" transform="rotate(216 -6 10)"/>
+      <ellipse class="flower-petal-light" cx="-10" cy="0" rx="7" ry="11" transform="rotate(288 -10 0)"/>
+      <circle class="flower-centre" r="4"/>
+    </g>
+  </symbol>
+</svg>
 
-  <!-- PANEL 1: ENVELOPE / OPEN -->
-  <section class="panel envelope-panel" id="openEnvelope" role="button" tabindex="0" aria-label="Tap to open the wedding invitation">
-    <div class="inner-frame"></div>
-    <div class="envelope-art"></div>
-    <div class="envelope-flap"></div>
-    <div class="envelope-seal">T&nbsp;A</div>
-    <span class="flower one">✿</span>
-    <span class="flower two">❀</span>
-    <div class="envelope-copy">
-      <div class="eyebrow">A Wedding Invitation</div>
-      <div class="tap-label">Tap to open</div>
-      <div class="tap-hand">♧</div>
+<!-- Opening envelope -->
+<section id="opening">
+  <span class="opening-flower f1">✿</span>
+  <span class="opening-flower f2">❀</span>
+  <span class="opening-flower f3">✿</span>
+
+  <div class="envelope-area">
+    <div class="envelope" id="envelope" role="button" tabindex="0" aria-label="Tap the seal to open invitation">
+      <div class="envelope-back"></div>
+      <div class="envelope-paper"></div>
+      <div class="envelope-front"></div>
+      <div class="envelope-flap"></div>
+      <div class="envelope-seal">T&nbsp;A</div>
     </div>
-  </section>
+    <div class="opening-label">Tap the seal to open</div>
+    <div class="opening-subtitle">A Wedding Invitation</div>
+    <div class="tap-icon">♧</div>
+  </div>
+</section>
 
-  <!-- PANEL 2: COUPLE -->
-  <section class="panel hero-panel locked">
-    <div class="inner-frame"></div>
-    <div class="arch"></div>
-    <span class="lantern left">♜</span>
-    <span class="lantern right">♜</span>
-    <span class="flower one">✿</span>
-    <span class="flower two">❀</span>
-    <span class="flower three">✿</span>
-    <div class="bismillah">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</div>
-    <div class="gold-divider"></div>
-    <div class="eyebrow">A new chapter unfolds</div>
-    <div class="eyebrow">As two souls unite in Nikah</div>
-    <div class="names">
-      Tabinda
-      <span class="and">&amp;</span>
-      Adil
-    </div>
-    <div class="gold-divider"></div>
-    <div class="bottom-copy">
-      <div class="eyebrow">With the blessings</div>
-      <div class="eyebrow">of our families</div>
-      <p class="body-copy">We cordially invite you<br>to witness the union<br>of our youngest daughter</p>
-    </div>
-  </section>
+<main id="invitation">
+  <div class="invitation-grid">
 
-  <!-- PANEL 3: FAMILY -->
-  <section class="panel family-panel locked">
-    <div class="inner-frame"></div>
-    <span class="flower one">✿</span>
-    <span class="flower four">❀</span>
-    <div class="monogram">T&nbsp;A</div>
-    <p class="body-copy">
-      Mrs. Farhana Khan<br>
-      Wife of (Late) Mr. Mujahid Hasan Khan
-    </p>
-    <div class="gold-divider"></div>
-    <p class="body-copy">Cordially invites you to witness<br>the union of our youngest daughter</p>
-    <div class="person">Tabinda Khan</div>
-    <p class="body-copy">D/o (Late) Mr. Mujahid Hasan Khan</p>
-    <div class="with">With</div>
-    <div class="person groom">Mohd. Adil Kamaal</div>
-    <p class="body-copy">S/o Mr. &amp; Mrs. Khursheed Anwar</p>
-  </section>
+    <!-- 1: Hero -->
+    <section class="panel hero-panel">
+      <div class="inner-frame"></div>
+      <div class="arch"></div>
+      <span class="lantern left">♜</span>
+      <span class="lantern right">♜</span>
 
-  <!-- PANEL 4: PROGRAMME -->
-  <section class="panel programme-panel locked">
-    <div class="inner-frame"></div>
-    <span class="flower one">✿</span>
-    <span class="flower four">❀</span>
-    <h2 class="heading">Programme</h2>
-    <div class="gold-divider"></div>
-    <div class="body-copy">A day of duas and celebration</div>
-    <div class="events">
-      <div class="event">
-        <div class="event-icon">♜</div>
-        <div>
-          <div class="event-title">Nikah</div>
-          <div class="event-detail">(At Al-Madeena Masjid)<br>3:30 PM</div>
+      <div class="flower-corner flower-top-left"><svg><use href="#floral"/></svg></div>
+      <div class="flower-corner flower-bottom-right"><svg><use href="#floral"/></svg></div>
+
+      <div class="bismillah">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</div>
+      <div class="gold-divider"></div>
+      <div class="eyebrow">A new chapter unfolds</div>
+      <div class="eyebrow">As two souls unite in Nikah</div>
+
+      <div class="hero-names">
+        Tabinda
+        <span class="and">&amp;</span>
+        Adil
+      </div>
+
+      <div class="gold-divider"></div>
+      <div class="hero-bottom">
+        <div class="eyebrow">With the blessings of our families</div>
+        <p class="body-copy">We cordially invite you<br>to witness the union<br>of our youngest daughter</p>
+      </div>
+    </section>
+
+    <!-- 2: Family -->
+    <section class="panel family-panel">
+      <div class="inner-frame"></div>
+      <div class="flower-corner flower-top-left small"><svg><use href="#floral"/></svg></div>
+      <div class="flower-corner flower-bottom-right small"><svg><use href="#floral"/></svg></div>
+
+      <div class="monogram">T&nbsp;A</div>
+      <p class="body-copy">Mrs. Farhana Khan<br>Wife of (Late) Mr. Mujahid Hasan Khan</p>
+      <div class="gold-divider"></div>
+      <p class="body-copy">Cordially invites you to witness<br>the union of our youngest daughter</p>
+      <div class="person">Tabinda Khan</div>
+      <p class="body-copy">D/o (Late) Mr. Mujahid Hasan Khan</p>
+      <div class="with">With</div>
+      <div class="person groom">Mohd. Adil Kamaal</div>
+      <p class="body-copy">S/o Mr. &amp; Mrs. Khursheed Anwar</p>
+    </section>
+
+    <!-- 3: Programme and venue -->
+    <section class="panel programme-panel">
+      <div class="inner-frame"></div>
+      <div class="flower-corner flower-top-left small"><svg><use href="#floral"/></svg></div>
+      <div class="flower-corner flower-bottom-right small"><svg><use href="#floral"/></svg></div>
+
+      <h2 class="heading">Programme</h2>
+      <div class="gold-divider"></div>
+      <p class="body-copy">A day of duas and celebration</p>
+
+      <div class="events">
+        <div class="event">
+          <div class="event-icon">♜</div>
+          <div>
+            <div class="event-title">Nikah</div>
+            <div class="event-detail">At Al-Madeena Masjid<br>3:30 PM</div>
+          </div>
+        </div>
+        <div class="event">
+          <div class="event-icon">♡</div>
+          <div>
+            <div class="event-title">Ruksati</div>
+            <div class="event-detail">After Magrib</div>
+          </div>
+        </div>
+        <div class="event">
+          <div class="event-icon">♧</div>
+          <div>
+            <div class="event-title">Dinner</div>
+            <div class="event-detail">7:30 PM</div>
+          </div>
         </div>
       </div>
-      <div class="event">
-        <div class="event-icon">♡</div>
-        <div>
-          <div class="event-title">Ruksati</div>
-          <div class="event-detail">After Magrib</div>
-        </div>
+
+      <div class="venue-inset">
+        <div class="heading">Venue</div>
+        <div class="gold-divider"></div>
+        <div class="venue-name">Bandhan Marriage Hall</div>
+        <div class="body-copy">Civil Lines, Rampur (U.P.)</div>
       </div>
-      <div class="event">
-        <div class="event-icon">♧</div>
-        <div>
-          <div class="event-title">Dinner</div>
-          <div class="event-detail">7:30 PM</div>
+    </section>
+
+    <!-- 4: Scratch -->
+    <section class="panel scratch-panel">
+      <div class="inner-frame"></div>
+      <div class="arch"></div>
+      <span class="lantern left">♜</span>
+      <span class="lantern right">♜</span>
+      <div class="flower-corner flower-bottom-left small"><svg><use href="#floral"/></svg></div>
+      <div class="flower-corner flower-bottom-right small"><svg><use href="#floral"/></svg></div>
+
+      <h2 class="heading">Save the Date</h2>
+      <div class="gold-divider"></div>
+      <div class="scratch-intro">The moments are<br>getting closer</div>
+
+      <div class="scratch-wrap">
+        <div class="scratch-under">
+          <small>OUR SPECIAL DAY</small>
+          <strong id="revealedDate"></strong>
         </div>
+        <canvas id="scratchCanvas" aria-label="Scratch to reveal the wedding date"></canvas>
       </div>
-    </div>
-    <div class="venue-inset">
-      <div class="heading">Venue</div>
+      <div class="scratch-hint">Scratch gently to reveal</div>
+
+      <svg class="mosque-art" viewBox="0 0 300 190" aria-hidden="true">
+        <g fill="#b88a70" stroke="#8f6657" stroke-width="1">
+          <path d="M35 175V118h25v57M240 175V118h25v57"/>
+          <path d="M28 118h39l-19-18zM233 118h39l-19-18z"/>
+          <path d="M75 175V125h150v50z"/>
+          <path d="M105 125q45-75 90 0z"/>
+          <path d="M135 175v-35q15-24 30 0v35z" fill="#f6dfc9"/>
+          <path d="M150 50v-20m-7 20h14l-7-12z"/>
+        </g>
+        <path d="M0 176h300M0 184h300" stroke="#b78a50" stroke-width="2"/>
+      </svg>
+    </section>
+
+    <!-- 5: Countdown, initially hidden -->
+    <section class="panel countdown-panel" id="countdownPanel" hidden>
+      <div class="inner-frame"></div>
+      <div class="flower-corner flower-top-left small"><svg><use href="#floral"/></svg></div>
+      <div class="flower-corner flower-bottom-right small"><svg><use href="#floral"/></svg></div>
+
+      <h2 class="heading">The Countdown</h2>
+      <div class="gold-divider"></div>
+      <div class="count-copy">Until our special day</div>
+
+      <div class="countdown">
+        <div class="count-box"><span class="count-number" id="days">00</span><span class="count-label">Days</span></div>
+        <div class="count-box"><span class="count-number" id="hours">00</span><span class="count-label">Hours</span></div>
+        <div class="count-box"><span class="count-number" id="minutes">00</span><span class="count-label">Minutes</span></div>
+        <div class="count-box"><span class="count-number" id="seconds">00</span><span class="count-label">Seconds</span></div>
+      </div>
+
+      <svg class="mosque-art" viewBox="0 0 300 190" aria-hidden="true">
+        <g fill="#b98b75" stroke="#906858" stroke-width="1">
+          <path d="M25 178V75h20v103M255 178V75h20v103"/>
+          <path d="M19 75h32L35 55zM249 75h32l-16-20z"/>
+          <path d="M85 178V122h130v56z"/>
+          <path d="M105 122q45-88 90 0z"/>
+          <path d="M132 178v-32q18-28 36 0v32z" fill="#f9e6d5"/>
+          <path d="M35 55V25m-6 30h12l-6-12zM265 55V25m-6 30h12l-6-12z"/>
+        </g>
+        <path d="M0 178h300" stroke="#b78a50" stroke-width="2"/>
+      </svg>
+    </section>
+
+    <!-- 6: Venue details -->
+    <section class="panel venue-panel">
+      <div class="inner-frame"></div>
+      <div class="flower-corner flower-top-left small"><svg><use href="#floral"/></svg></div>
+      <div class="flower-corner flower-bottom-right small"><svg><use href="#floral"/></svg></div>
+
+      <h2 class="heading">Venue</h2>
       <div class="gold-divider"></div>
       <div class="venue-name">Bandhan Marriage Hall</div>
       <div class="body-copy">Civil Lines, Rampur (U.P.)</div>
-    </div>
-  </section>
 
-  <!-- PANEL 5: SCRATCH REVEAL -->
-  <section class="panel scratch-panel locked">
-    <div class="inner-frame"></div>
-    <div class="arch"></div>
-    <span class="lantern left">♜</span>
-    <span class="lantern right">♜</span>
-    <span class="flower two">❀</span>
-    <h2 class="heading">Save the Date</h2>
-    <div class="gold-divider"></div>
-    <div class="scratch-intro">The moments are<br>getting closer</div>
-    <div class="scratch-wrap">
-      <div class="scratch-under">
-        <small>OUR SPECIAL DAY</small>
-        <strong id="revealedDate"></strong>
+      <div class="venue-picture">
+        <svg viewBox="0 0 300 235" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <defs>
+            <linearGradient id="venueSky" x2="0" y2="1">
+              <stop stop-color="#3d3045"/><stop offset="1" stop-color="#c58c82"/>
+            </linearGradient>
+            <linearGradient id="venueWall" x2="0" y2="1">
+              <stop stop-color="#f4d5ad"/><stop offset="1" stop-color="#98644d"/>
+            </linearGradient>
+          </defs>
+          <rect width="300" height="235" fill="url(#venueSky)"/>
+          <circle cx="235" cy="38" r="19" fill="#f6dfbd" opacity=".75"/>
+          <path d="M20 180V95h260v85z" fill="url(#venueWall)" stroke="#f3d4a7" stroke-width="3"/>
+          <path d="M5 95h290L150 52z" fill="#a96e59" stroke="#e9c18d" stroke-width="3"/>
+          <path d="M112 180v-55q38-54 76 0v55z" fill="#4a3345" stroke="#f4d7a8" stroke-width="4"/>
+          <path d="M128 180v-42q22-31 44 0v42z" fill="#d7a16e"/>
+          <g fill="#493244" stroke="#f3d2a0" stroke-width="3">
+            <path d="M36 180v-38q15-22 30 0v38z"/>
+            <path d="M234 180v-38q15-22 30 0v38z"/>
+          </g>
+          <path d="M0 190h300l-35 45H35z" fill="#d5a88f"/>
+          <path d="M0 207h300M0 221h300" stroke="#f4d5ae" opacity=".7"/>
+        </svg>
       </div>
-      <canvas id="scratchCanvas" aria-label="Scratch to reveal the wedding date"></canvas>
-    </div>
-    <div class="scratch-hint">Scratch gently to reveal</div>
-    <svg class="mosque-art" viewBox="0 0 300 190" aria-hidden="true">
-      <g fill="#b88a70" stroke="#8f6657" stroke-width="1">
-        <path d="M35 175V118h25v57M240 175V118h25v57"/>
-        <path d="M28 118h39l-19-18zM233 118h39l-19-18z"/>
-        <path d="M75 175V125h150v50z"/>
-        <path d="M105 125q45-75 90 0z"/>
-        <path d="M135 175v-35q15-24 30 0v35z" fill="#f6dfc9"/>
-        <path d="M150 50v-20m-7 20h14l-7-12z"/>
-        <path d="M45 100V80m-7 20h14l-7-12zM255 100V80m-7 20h14l-7-12z"/>
-      </g>
-      <path d="M0 176h300" stroke="#b78a50" stroke-width="2"/>
-      <path d="M0 184h300" stroke="#d9b98d" stroke-width="1"/>
-    </svg>
-  </section>
 
-  <!-- PANEL 6: COUNTDOWN -->
-  <section class="panel countdown-panel locked" id="countdownPanel">
-    <div class="inner-frame"></div>
-    <span class="flower one">✿</span>
-    <span class="flower four">❀</span>
-    <h2 class="heading">The Countdown</h2>
-    <div class="gold-divider"></div>
-    <div class="count-copy">Until our special day</div>
-    <div class="countdown">
-      <div class="count-box"><span class="count-number" id="days">00</span><span class="count-label">Days</span></div>
-      <div class="count-box"><span class="count-number" id="hours">00</span><span class="count-label">Hours</span></div>
-      <div class="count-box"><span class="count-number" id="minutes">00</span><span class="count-label">Minutes</span></div>
-      <div class="count-box"><span class="count-number" id="seconds">00</span><span class="count-label">Seconds</span></div>
-    </div>
-    <svg class="mosque-art" viewBox="0 0 300 190" aria-hidden="true">
-      <g fill="#b98b75" stroke="#906858" stroke-width="1">
-        <path d="M25 178V75h20v103M255 178V75h20v103"/>
-        <path d="M19 75h32L35 55zM249 75h32l-16-20z"/>
-        <path d="M85 178V122h130v56z"/>
-        <path d="M105 122q45-88 90 0z"/>
-        <path d="M132 178v-32q18-28 36 0v32z" fill="#f9e6d5"/>
-        <path d="M35 55V25m-6 30h12l-6-12zM265 55V25m-6 30h12l-6-12z"/>
-        <path d="M150 42V20m-7 22h14l-7-12z"/>
-      </g>
-      <path d="M0 178h300" stroke="#b78a50" stroke-width="2"/>
-    </svg>
-  </section>
+      <a class="map-button" href="https://www.google.com/maps/search/?api=1&query=Bandhan+Marriage+Hall+Civil+Lines+Rampur+Uttar+Pradesh" target="_blank" rel="noopener">⌖ &nbsp; VIEW LOCATION</a>
+      <div class="quote">Your presence will make<br>our celebration even more special.</div>
+    </section>
 
-  <!-- PANEL 7: VENUE -->
-  <section class="panel venue-panel locked">
-    <div class="inner-frame"></div>
-    <span class="flower one">✿</span>
-    <span class="flower four">❀</span>
-    <h2 class="heading">Venue</h2>
-    <div class="gold-divider"></div>
-    <div class="venue-name">Bandhan Marriage Hall</div>
-    <div class="body-copy">Civil Lines, Rampur (U.P.)</div>
+    <!-- 7: Gratitude -->
+    <section class="panel gratitude-panel">
+      <div class="inner-frame"></div>
+      <div class="arch"></div>
+      <span class="lantern left">♜</span>
+      <span class="lantern right">♜</span>
+      <div class="flower-corner flower-bottom-left small"><svg><use href="#floral"/></svg></div>
+      <div class="flower-corner flower-bottom-right small"><svg><use href="#floral"/></svg></div>
 
-    <div class="venue-picture">
-      <svg viewBox="0 0 300 235" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-        <defs>
-          <linearGradient id="sky" x2="0" y2="1">
-            <stop stop-color="#342b43"/>
-            <stop offset="1" stop-color="#c58c82"/>
-          </linearGradient>
-          <linearGradient id="hall" x2="0" y2="1">
-            <stop stop-color="#f4d5ad"/>
-            <stop offset="1" stop-color="#98644d"/>
-          </linearGradient>
-        </defs>
-        <rect width="300" height="235" fill="url(#sky)"/>
-        <circle cx="235" cy="38" r="19" fill="#f6dfbd" opacity=".75"/>
-        <path d="M20 180V95h260v85z" fill="url(#hall)" stroke="#f3d4a7" stroke-width="3"/>
-        <path d="M5 95h290L150 52z" fill="#a96e59" stroke="#e9c18d" stroke-width="3"/>
-        <path d="M112 180v-55q38-54 76 0v55z" fill="#4a3345" stroke="#f4d7a8" stroke-width="4"/>
-        <path d="M128 180v-42q22-31 44 0v42z" fill="#d7a16e"/>
-        <g fill="#493244" stroke="#f3d2a0" stroke-width="3">
-          <path d="M36 180v-38q15-22 30 0v38z"/>
-          <path d="M234 180v-38q15-22 30 0v38z"/>
+      <h2 class="heading">With Love,<br>Duas &amp; Gratitude</h2>
+      <div class="gold-divider"></div>
+      <p class="body-copy">Your presence, prayers and<br>blessings mean the world to us.</p>
+      <p class="body-copy">We cannot wait to share<br>this beautiful day with you.</p>
+      <div class="signature">Tabinda &amp; Adil</div>
+      <div class="heart">♥</div>
+
+      <svg class="mosque-art" viewBox="0 0 300 155" aria-hidden="true">
+        <g fill="#c49a83" stroke="#9d735f" stroke-width="1">
+          <path d="M30 145V82h18v63M252 145V82h18v63"/>
+          <path d="M25 82h28L39 64zM247 82h28l-14-18z"/>
+          <path d="M75 145V105h150v40z"/>
+          <path d="M100 105q50-75 100 0z"/>
+          <path d="M132 145v-27q18-25 36 0v27z" fill="#f8e5d4"/>
         </g>
-        <path d="M0 190h300l-35 45H35z" fill="#d5a88f"/>
-        <path d="M0 207h300M0 221h300" stroke="#f4d5ae" opacity=".7"/>
-        <g fill="#f8d99e">
-          <circle cx="150" cy="116" r="4"/><circle cx="52" cy="132" r="3"/><circle cx="248" cy="132" r="3"/>
-        </g>
+        <path d="M0 145h300" stroke="#b78a50"/>
       </svg>
-    </div>
+    </section>
 
-    <a class="map-button" href="https://www.google.com/maps/search/?api=1&query=Bandhan+Marriage+Hall+Civil+Lines+Rampur+Uttar+Pradesh" target="_blank" rel="noopener">⌖ &nbsp; VIEW LOCATION</a>
-    <div class="quote">Your presence will make<br>our celebration even more special.</div>
-  </section>
+    <!-- 8: Closing -->
+    <section class="panel final-panel">
+      <div class="inner-frame"></div>
+      <div class="arch"></div>
+      <div class="flower-corner flower-top-left"><svg><use href="#floral"/></svg></div>
+      <div class="flower-corner flower-bottom-right"><svg><use href="#floral"/></svg></div>
 
-  <!-- PANEL 8: GRATITUDE -->
-  <section class="panel gratitude-panel locked">
-    <div class="inner-frame"></div>
-    <div class="arch"></div>
-    <span class="lantern left">♜</span>
-    <span class="lantern right">♜</span>
-    <span class="flower one">✿</span>
-    <span class="flower four">❀</span>
-    <h2 class="heading">With Love,<br>Duas &amp; Gratitude</h2>
-    <div class="gold-divider"></div>
-    <p class="body-copy">Your presence, prayers and<br>blessings mean the world to us.</p>
-    <p class="body-copy">We cannot wait to share<br>this beautiful day with you.</p>
-    <div class="signature">Tabinda &amp; Adil</div>
-    <div class="heart">♥</div>
-    <svg class="mosque-art" viewBox="0 0 300 155" aria-hidden="true">
-      <g fill="#c49a83" stroke="#9d735f" stroke-width="1">
-        <path d="M30 145V82h18v63M252 145V82h18v63"/>
-        <path d="M25 82h28L39 64zM247 82h28l-14-18z"/>
-        <path d="M75 145V105h150v40z"/>
-        <path d="M100 105q50-75 100 0z"/>
-        <path d="M132 145v-27q18-25 36 0v27z" fill="#f8e5d4"/>
-      </g>
-      <path d="M0 145h300" stroke="#b78a50"/>
-    </svg>
-  </section>
+      <div class="final-title">Jazak<br>Allah</div>
+      <div class="gold-divider"></div>
+      <div class="final-copy">For being a part of<br>our special journey</div>
 
-  <!-- PANEL 9: CLOSING -->
-  <section class="panel final-panel locked">
-    <div class="inner-frame"></div>
-    <div class="arch"></div>
-    <span class="flower one">✿</span>
-    <span class="flower four">❀</span>
-    <div class="final-title">Jazak<br>Allah</div>
-    <div class="gold-divider"></div>
-    <div class="final-copy">For being a part of<br>our special journey</div>
-    <svg class="mosque-art" viewBox="0 0 300 190" aria-hidden="true">
-      <g fill="#c39a83" stroke="#936a5a" stroke-width="1">
-        <path d="M20 180V90h20v90M260 180V90h20v90"/>
-        <path d="M15 90h30L30 70zM255 90h30l-15-20z"/>
-        <path d="M70 180V125h160v55z"/>
-        <path d="M105 125q45-85 90 0z"/>
-        <path d="M132 180v-35q18-27 36 0v35z" fill="#f9e6d5"/>
-        <path d="M30 70V42m-6 28h12l-6-12zM270 70V42m-6 28h12l-6-12z"/>
-        <path d="M150 50V25m-7 25h14l-7-12z"/>
-      </g>
-      <path d="M0 180h300" stroke="#b78a50" stroke-width="2"/>
-    </svg>
-  </section>
+      <svg class="mosque-art" viewBox="0 0 300 190" aria-hidden="true">
+        <g fill="#c39a83" stroke="#936a5a" stroke-width="1">
+          <path d="M20 180V90h20v90M260 180V90h20v90"/>
+          <path d="M15 90h30L30 70zM255 90h30l-15-20z"/>
+          <path d="M70 180V125h160v55z"/>
+          <path d="M105 125q45-85 90 0z"/>
+          <path d="M132 180v-35q18-27 36 0v35z" fill="#f9e6d5"/>
+          <path d="M30 70V42m-6 28h12l-6-12zM270 70V42m-6 28h12l-6-12z"/>
+        </g>
+        <path d="M0 180h300" stroke="#b78a50" stroke-width="2"/>
+      </svg>
+    </section>
 
+  </div>
 </main>
 
 <audio id="weddingMusic" loop preload="auto">
@@ -859,26 +1048,37 @@ button { font: inherit; }
 <button class="music-button" id="musicButton" aria-label="Pause or play music">♫</button>
 
 <script>
-const openEnvelope = document.getElementById("openEnvelope");
-const lockedPanels = document.querySelectorAll(".panel.locked");
+const opening = document.getElementById("opening");
+const envelope = document.getElementById("envelope");
+const invitation = document.getElementById("invitation");
 const music = document.getElementById("weddingMusic");
 const musicButton = document.getElementById("musicButton");
 
-async function openInvitation() {
-  lockedPanels.forEach(panel => panel.classList.remove("locked"));
-  openEnvelope.setAttribute("aria-label", "Invitation opened");
+let invitationOpened = false;
 
+async function openInvitation() {
+  if (invitationOpened) return;
+  invitationOpened = true;
+
+  /* Start music from the same user tap */
   musicButton.style.display = "block";
-  try {
-    await music.play();
+  music.play().then(() => {
     musicButton.textContent = "♫";
-  } catch (error) {
+  }).catch(() => {
     musicButton.textContent = "♪";
-  }
+  });
+
+  /* Animate the envelope flap before revealing the invitation */
+  envelope.classList.add("opened");
+
+  window.setTimeout(() => {
+    opening.classList.add("dismissed");
+    invitation.classList.add("visible");
+  }, 1050);
 }
 
-openEnvelope.addEventListener("click", openInvitation);
-openEnvelope.addEventListener("keydown", event => {
+envelope.addEventListener("click", openInvitation);
+envelope.addEventListener("keydown", event => {
   if (event.key === "Enter" || event.key === " ") {
     event.preventDefault();
     openInvitation();
@@ -899,24 +1099,28 @@ musicButton.addEventListener("click", async () => {
   }
 });
 
-/* The date is formatted only after the scratch card is revealed. */
+/* The calendar date is created in JavaScript and is not printed
+   anywhere in the invitation until the scratch card is completed. */
 const weddingTimestamp = new Date(2026, 9, 9, 0, 0, 0).getTime();
 
 const canvas = document.getElementById("scratchCanvas");
 const ctx = canvas.getContext("2d");
-let isScratching = false;
+let scratching = false;
 let dateRevealed = false;
 
 function drawScratchCover() {
-  const rect = canvas.getBoundingClientRect();
-  const dpr = window.devicePixelRatio || 1;
+  if (dateRevealed) return;
 
+  const rect = canvas.getBoundingClientRect();
+  if (!rect.width || !rect.height) return;
+
+  const dpr = window.devicePixelRatio || 1;
   canvas.width = Math.round(rect.width * dpr);
   canvas.height = Math.round(rect.height * dpr);
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
   const gradient = ctx.createLinearGradient(0, 0, rect.width, rect.height);
-  gradient.addColorStop(0, "#e2c49b");
+  gradient.addColorStop(0, "#e3c69d");
   gradient.addColorStop(.5, "#b88950");
   gradient.addColorStop(1, "#d9b47a");
 
@@ -924,7 +1128,7 @@ function drawScratchCover() {
   ctx.fillStyle = gradient;
   ctx.fillRect(0, 0, rect.width, rect.height);
 
-  ctx.fillStyle = "rgba(255,255,255,.22)";
+  ctx.fillStyle = "rgba(255,255,255,.23)";
   for (let i = 0; i < 35; i++) {
     ctx.beginPath();
     ctx.arc(Math.random() * rect.width, Math.random() * rect.height, Math.random() * 2 + .5, 0, Math.PI * 2);
@@ -970,33 +1174,38 @@ function revealWeddingDate() {
   if (dateRevealed) return;
   dateRevealed = true;
 
-  document.getElementById("revealedDate").textContent =
-    new Intl.DateTimeFormat("en-GB", {
-      day: "2-digit",
-      month: "long",
-      year: "numeric"
-    }).format(weddingTimestamp);
+  const formattedDate = new Intl.DateTimeFormat("en-GB", {
+    day: "2-digit",
+    month: "long",
+    year: "numeric"
+  }).format(weddingTimestamp);
 
+  document.getElementById("revealedDate").textContent = formattedDate;
   canvas.style.display = "none";
+
+  const countdownPanel = document.getElementById("countdownPanel");
+  countdownPanel.hidden = false;
+
   startCountdown();
 }
 
 canvas.addEventListener("pointerdown", event => {
-  isScratching = true;
+  scratching = true;
   canvas.setPointerCapture(event.pointerId);
   scratchAt(event);
 });
 
 canvas.addEventListener("pointermove", event => {
-  if (isScratching) scratchAt(event);
+  if (scratching) scratchAt(event);
 });
 
-canvas.addEventListener("pointerup", () => isScratching = false);
-canvas.addEventListener("pointercancel", () => isScratching = false);
+canvas.addEventListener("pointerup", () => scratching = false);
+canvas.addEventListener("pointercancel", () => scratching = false);
 
 function startCountdown() {
   function update() {
     const remaining = weddingTimestamp - Date.now();
+
     const values = {
       days: Math.max(0, Math.floor(remaining / 86400000)),
       hours: Math.max(0, Math.floor((remaining / 3600000) % 24)),
@@ -1010,13 +1219,11 @@ function startCountdown() {
   }
 
   update();
-  setInterval(update, 1000);
+  window.setInterval(update, 1000);
 }
 
 window.addEventListener("load", drawScratchCover);
-window.addEventListener("resize", () => {
-  if (!dateRevealed) drawScratchCover();
-});
+window.addEventListener("resize", drawScratchCover);
 </script>
 
 </body>
