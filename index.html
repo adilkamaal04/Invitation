@@ -106,6 +106,7 @@ button {
         inset 0 0 25px rgba(197,163,106,.15);
 
     transform: rotate(-1deg);
+    perspective: 1400px;
     transition: transform .8s ease;
 }
 
@@ -164,9 +165,13 @@ button {
 
     clip-path: polygon(0 0,100% 0,50% 100%);
     z-index: 5;
-    transform-origin: top center;
 
-    transition: transform 1.35s cubic-bezier(.6,.05,.2,1);
+    transform-origin: top center;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+
+    /* SLOW LUXURY OPENING ANIMATION */
+    transition: transform 5.2s cubic-bezier(.65,0,.25,1);
 }
 
 .envelope.open .envelope-flap {
@@ -570,10 +575,6 @@ h2 {
     pointer-events: auto;
 }
 
-.name-panel .tiny {
-    margin-bottom: 18px;
-}
-
 .couple-names {
     font-family: "Allura", cursive;
     font-size: clamp(75px,17vw,100px);
@@ -693,6 +694,111 @@ h2 {
     letter-spacing: .18em;
 
     color: #987846;
+}
+
+/* =========================================
+   NEW: HIDDEN COUNTDOWN
+========================================= */
+
+.countdown-wrapper {
+    display: none;
+
+    width: 100%;
+    max-width: 390px;
+
+    margin: 42px auto 0;
+    padding: 30px 16px 25px;
+
+    background: var(--ivory-light);
+    border: 1px solid var(--gold);
+
+    box-shadow: 0 15px 35px rgba(31,57,43,.08);
+
+    opacity: 0;
+    transform: translateY(20px);
+
+    transition:
+        opacity 1.3s ease,
+        transform 1.3s ease;
+}
+
+.countdown-wrapper.visible {
+    display: block;
+}
+
+.countdown-wrapper.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.countdown-heading {
+    font-family: "Allura", cursive;
+    font-size: 48px;
+    line-height: 1.1;
+    color: var(--emerald);
+}
+
+.countdown-subtitle {
+    margin-top: 7px;
+
+    font-family: "Cinzel", serif;
+    font-size: 8px;
+    letter-spacing: .16em;
+    color: #987846;
+}
+
+.countdown-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+
+    margin-top: 25px;
+}
+
+.countdown-item {
+    padding: 14px 3px 12px;
+
+    background: #F4EBDD;
+    border: 1px solid rgba(197,163,106,.5);
+}
+
+.countdown-number {
+    display: block;
+
+    font-family: "Bodoni Moda", serif;
+    font-size: clamp(25px, 7vw, 36px);
+    line-height: 1.2;
+
+    color: var(--emerald);
+    font-variant-numeric: tabular-nums;
+}
+
+.countdown-label {
+    display: block;
+    margin-top: 5px;
+
+    font-family: "Cinzel", serif;
+    font-size: 7px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+
+    color: #987846;
+}
+
+.countdown-footer {
+    margin-top: 22px;
+
+    font-family: "Cormorant Garamond", serif;
+    font-style: italic;
+    font-size: 20px;
+
+    color: var(--muted);
+}
+
+.countdown-heart {
+    margin-top: 12px;
+    color: var(--gold);
+    font-size: 18px;
 }
 
 /* =========================================
@@ -923,6 +1029,14 @@ h2 {
         grid-template-columns: 82px 1fr;
         gap: 8px;
     }
+
+    .countdown-grid {
+        gap: 5px;
+    }
+
+    .countdown-item {
+        padding: 12px 2px;
+    }
 }
 
 @media(prefers-reduced-motion:reduce) {
@@ -1086,7 +1200,7 @@ h2 {
 </section>
 
 
-<!-- SCRATCH DATE -->
+<!-- SCRATCH DATE + COUNTDOWN -->
 
 <section class="section scratch" id="scratchSection">
 
@@ -1118,6 +1232,57 @@ h2 {
 
     <div class="scratch-hint">
         ✦ SCRATCH GENTLY TO REVEAL ✦
+    </div>
+
+
+    <!-- COUNTDOWN: HIDDEN UNTIL SCRATCH IS COMPLETED -->
+
+    <div class="countdown-wrapper" id="countdownWrapper">
+
+        <div class="tiny">
+            EVERY MOMENT BRINGS US CLOSER
+        </div>
+
+        <div class="countdown-heading">
+            The countdown
+        </div>
+
+        <div class="countdown-subtitle">
+            UNTIL OUR BEAUTIFUL BEGINNING
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="countdown-grid" aria-live="polite">
+
+            <div class="countdown-item">
+                <span class="countdown-number" id="days">00</span>
+                <span class="countdown-label">Days</span>
+            </div>
+
+            <div class="countdown-item">
+                <span class="countdown-number" id="hours">00</span>
+                <span class="countdown-label">Hours</span>
+            </div>
+
+            <div class="countdown-item">
+                <span class="countdown-number" id="minutes">00</span>
+                <span class="countdown-label">Minutes</span>
+            </div>
+
+            <div class="countdown-item">
+                <span class="countdown-number" id="seconds">00</span>
+                <span class="countdown-label">Seconds</span>
+            </div>
+
+        </div>
+
+        <div class="countdown-footer" id="countdownFooter">
+            A lifetime of love begins with a moment.
+        </div>
+
+        <div class="countdown-heart">♥</div>
+
     </div>
 
 </section>
@@ -1323,6 +1488,11 @@ openButton.addEventListener("click", async function() {
 
     }
 
+    /*
+       Wait for the complete 5.2-second flap animation
+       before fading away the opening screen.
+    */
+
     setTimeout(function() {
 
         opening.style.opacity = "0";
@@ -1334,7 +1504,7 @@ openButton.addEventListener("click", async function() {
 
         }, 1200);
 
-    }, 1000);
+    }, 5300);
 
 });
 
@@ -1381,6 +1551,9 @@ const ctx = canvas.getContext("2d");
 
 const namePanel = document.getElementById("namePanel");
 const nameSection = document.getElementById("nameSection");
+
+const countdownWrapper =
+    document.getElementById("countdownWrapper");
 
 let scratching = false;
 let revealed = false;
@@ -1509,11 +1682,6 @@ function checkScratchProgress() {
     let transparent = 0;
     let total = 0;
 
-    /*
-       Sample pixels to keep the scratch effect
-       smooth on mobile devices.
-    */
-
     for (let i = 3; i < pixels.length; i += 16) {
 
         total++;
@@ -1528,22 +1696,47 @@ function checkScratchProgress() {
 
     if (progress >= 0.42) {
 
-        revealNames();
+        revealEverything();
 
     }
 
 }
 
 
-/* REVEAL THE COUPLE'S NAMES */
+/* =========================================
+   REVEAL NAMES + COUNTDOWN
+========================================= */
 
-function revealNames() {
+function revealEverything() {
 
     if (revealed) return;
 
     revealed = true;
 
+    /* Reveal names */
+
     namePanel.classList.add("revealed");
+
+    /* Reveal countdown */
+
+    countdownWrapper.classList.add("visible");
+
+    /*
+       Wait briefly for display:block to apply,
+       then animate the countdown into view.
+    */
+
+    requestAnimationFrame(function() {
+
+        requestAnimationFrame(function() {
+
+            countdownWrapper.classList.add("show");
+
+        });
+
+    });
+
+    /* Remove scratch surface */
 
     canvas.style.opacity = "0";
 
@@ -1553,9 +1746,13 @@ function revealNames() {
 
     }, 900);
 
+    /* Start live countdown */
+
+    startCountdown();
+
     /*
-       Bring the revealed names into view
-       after the scratch is completed.
+       Scroll back to the names after scratching.
+       The countdown is now revealed below the scratch card.
     */
 
     setTimeout(function() {
@@ -1570,7 +1767,90 @@ function revealNames() {
 }
 
 
-/* POINTER EVENTS: MOUSE + TOUCH */
+/* =========================================
+   LIVE COUNTDOWN
+   TARGET: 09 OCTOBER 2026, 3:30 PM IST
+========================================= */
+
+function startCountdown() {
+
+    const targetDate = new Date(
+        "2026-10-09T15:30:00+05:30"
+    ).getTime();
+
+    const daysElement = document.getElementById("days");
+    const hoursElement = document.getElementById("hours");
+    const minutesElement = document.getElementById("minutes");
+    const secondsElement = document.getElementById("seconds");
+
+    const footer = document.getElementById("countdownFooter");
+
+    function updateCountdown() {
+
+        const now = Date.now();
+
+        const distance = targetDate - now;
+
+        if (distance <= 0) {
+
+            daysElement.textContent = "00";
+            hoursElement.textContent = "00";
+            minutesElement.textContent = "00";
+            secondsElement.textContent = "00";
+
+            footer.textContent =
+                "The beautiful beginning is here. ♥";
+
+            clearInterval(countdownInterval);
+
+            return;
+
+        }
+
+        const days = Math.floor(
+            distance / (1000 * 60 * 60 * 24)
+        );
+
+        const hours = Math.floor(
+            (distance % (1000 * 60 * 60 * 24)) /
+            (1000 * 60 * 60)
+        );
+
+        const minutes = Math.floor(
+            (distance % (1000 * 60 * 60)) /
+            (1000 * 60)
+        );
+
+        const seconds = Math.floor(
+            (distance % (1000 * 60)) / 1000
+        );
+
+        daysElement.textContent = String(days).padStart(2, "0");
+
+        hoursElement.textContent =
+            String(hours).padStart(2, "0");
+
+        minutesElement.textContent =
+            String(minutes).padStart(2, "0");
+
+        secondsElement.textContent =
+            String(seconds).padStart(2, "0");
+
+    }
+
+    updateCountdown();
+
+    const countdownInterval = setInterval(
+        updateCountdown,
+        1000
+    );
+
+}
+
+
+/* =========================================
+   POINTER EVENTS: MOUSE + TOUCH
+========================================= */
 
 canvas.addEventListener("pointerdown", function(e) {
 
