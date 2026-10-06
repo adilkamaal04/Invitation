@@ -1138,4 +1138,670 @@ h2 {
 
     <p>
         Your presence and blessings will make this occasion
-        even more
+        even more meaningful.
+    </p>
+
+    <div class="heart">♥</div>
+
+</section>
+
+<section class="section name-reveal" id="nameSection">
+
+    <div class="tiny">
+        A LITTLE SECRET FROM OUR HEARTS
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="name-panel" id="namePanel">
+
+        <div class="tiny">
+            UNITED IN FAITH &amp; LOVE
+        </div>
+
+        <div class="couple-names">
+            Adil
+            <span class="and">&amp;</span>
+            Tabinda
+        </div>
+
+        <div class="blessing">
+            Two hearts, one promise, a lifetime of togetherness.
+        </div>
+
+        <div class="divider"></div>
+
+    </div>
+
+    <div class="tiny" style="margin-top:25px;">
+        SCRATCH BELOW TO REVEAL
+    </div>
+
+</section>
+
+<section class="section scratch" id="scratchSection">
+
+    <div class="tiny">
+        THE MOMENT WE HAVE BEEN WAITING FOR
+    </div>
+
+    <h2>Reveal our date</h2>
+
+    <div class="divider"></div>
+
+    <div class="scratch-box">
+
+        <div class="scratch-message">
+
+            <div class="revealed-date">
+                09 October 2026
+            </div>
+
+            <small>
+                FRIDAY · OUR NIKAH
+            </small>
+
+        </div>
+
+        <canvas id="scratchCanvas"></canvas>
+
+    </div>
+
+    <div class="scratch-hint">
+        ✦ SCRATCH GENTLY TO REVEAL ✦
+    </div>
+
+    <div class="countdown-wrapper" id="countdownWrapper">
+
+        <div class="tiny">
+            EVERY MOMENT BRINGS US CLOSER
+        </div>
+
+        <div class="countdown-heading">
+            The countdown
+        </div>
+
+        <div class="countdown-subtitle">
+            UNTIL OUR BEAUTIFUL BEGINNING
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="countdown-grid" aria-live="polite">
+
+            <div class="countdown-item">
+                <span class="countdown-number" id="days">00</span>
+                <span class="countdown-label">Days</span>
+            </div>
+
+            <div class="countdown-item">
+                <span class="countdown-number" id="hours">00</span>
+                <span class="countdown-label">Hours</span>
+            </div>
+
+            <div class="countdown-item">
+                <span class="countdown-number" id="minutes">00</span>
+                <span class="countdown-label">Minutes</span>
+            </div>
+
+            <div class="countdown-item">
+                <span class="countdown-number" id="seconds">00</span>
+                <span class="countdown-label">Seconds</span>
+            </div>
+
+        </div>
+
+        <div class="countdown-footer" id="countdownFooter">
+            A lifetime of love begins with a moment.
+        </div>
+
+        <div class="countdown-heart">♥</div>
+
+    </div>
+
+</section>
+
+<section class="section programme">
+
+    <div class="tiny">
+        THE CELEBRATION
+    </div>
+
+    <div class="programme-title">
+        Programme
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="programme-card">
+
+        <div class="tiny" style="margin-bottom:20px;">
+            A DAY TO REMEMBER
+        </div>
+
+        <div class="event">
+
+            <div class="event-time">
+                3:30 PM
+            </div>
+
+            <div>
+                <div class="event-name">
+                    Nikah
+                </div>
+
+                <div class="event-detail">
+                    Madeena Masjid
+                    <br>
+                    Rampur, Uttar Pradesh
+                </div>
+            </div>
+
+        </div>
+
+        <div class="event">
+
+            <div class="event-time">
+                After Magrib
+            </div>
+
+            <div>
+                <div class="event-name">
+                    Ruksati
+                </div>
+            </div>
+
+        </div>
+
+        <div class="venue-mini">
+
+            <div class="tiny">
+                VENUE
+            </div>
+
+            <strong>
+                Bandhan Marriage Hall
+            </strong>
+
+            <span>
+                Civil Lines, Rampur (U.P.)
+            </span>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="section venue short">
+
+    <div class="tiny">
+        WE LOOK FORWARD TO WELCOMING YOU
+    </div>
+
+    <h2 class="script" style="font-size:68px;">
+        Join us
+    </h2>
+
+    <div class="divider"></div>
+
+    <div class="venue-card">
+
+        <div class="venue-icon">♢</div>
+
+        <h3>
+            Bandhan Marriage Hall
+        </h3>
+
+        <p>
+            Civil Lines, Rampur (U.P.)
+        </p>
+
+        <a
+            class="map-button"
+            href="https://maps.app.goo.gl/So72z5jSJ8rW1VmA6"
+            target="_blank"
+            rel="noopener">
+
+            VIEW LOCATION
+
+        </a>
+
+    </div>
+
+</section>
+
+<section class="section final">
+
+    <div class="tiny">
+        WITH LOVE &amp; DUAS
+    </div>
+
+    <div class="divider"></div>
+
+    <p>
+        We look forward to sharing this beautiful beginning with you.
+        Your presence, prayers and blessings will make our celebration
+        even more special.
+    </p>
+
+    <div class="divider"></div>
+
+    <div class="heart">♥</div>
+
+</section>
+
+</main>
+
+<script>
+
+/* =========================================
+   ENVELOPE OPENING & MUSIC
+========================================= */
+
+const opening = document.getElementById("opening");
+const envelope = document.getElementById("envelope");
+const openButton = document.getElementById("openButton");
+
+const music = document.getElementById("weddingMusic");
+const musicButton = document.getElementById("musicButton");
+
+let musicPlaying = false;
+let invitationOpened = false;
+
+openButton.addEventListener("click", async function() {
+
+    if (invitationOpened) return;
+
+    invitationOpened = true;
+
+    envelope.classList.add("open");
+
+    musicButton.classList.add("visible");
+
+    try {
+
+        music.volume = 0.65;
+
+        await music.play();
+
+        musicPlaying = true;
+        musicButton.textContent = "Ⅱ";
+
+    } catch(error) {
+
+        musicPlaying = false;
+        musicButton.textContent = "♫";
+
+    }
+
+    setTimeout(function() {
+
+        opening.style.opacity = "0";
+
+        setTimeout(function() {
+
+            opening.style.visibility = "hidden";
+            opening.style.display = "none";
+
+        }, 1200);
+
+    }, 5300);
+
+});
+
+/* MUSIC CONTROL */
+
+musicButton.addEventListener("click", async function() {
+
+    if (musicPlaying) {
+
+        music.pause();
+
+        musicPlaying = false;
+
+        musicButton.textContent = "♫";
+
+    } else {
+
+        try {
+
+            await music.play();
+
+            musicPlaying = true;
+
+            musicButton.textContent = "Ⅱ";
+
+        } catch(error) {
+
+            musicButton.textContent = "♫";
+
+        }
+
+    }
+
+});
+
+/* =========================================
+   SCRATCH CARD
+========================================= */
+
+const canvas = document.getElementById("scratchCanvas");
+const ctx = canvas.getContext("2d");
+
+const namePanel = document.getElementById("namePanel");
+const nameSection = document.getElementById("nameSection");
+
+const countdownWrapper =
+    document.getElementById("countdownWrapper");
+
+let scratching = false;
+let revealed = false;
+let lastCheck = 0;
+
+function setupScratch() {
+
+    const rect = canvas.getBoundingClientRect();
+
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+    canvas.width = rect.width * dpr;
+    canvas.height = rect.height * dpr;
+
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    const gradient = ctx.createLinearGradient(
+        0, 0, rect.width, rect.height
+    );
+
+    gradient.addColorStop(0, "#D7B982");
+    gradient.addColorStop(.5, "#B78D50");
+    gradient.addColorStop(1, "#E5CE9E");
+
+    ctx.globalCompositeOperation = "source-over";
+
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, rect.width, rect.height);
+
+    for (let i = 0; i < 350; i++) {
+
+        ctx.fillStyle =
+            "rgba(255,250,235," +
+            (Math.random() * .25 + .04) +
+            ")";
+
+        ctx.beginPath();
+
+        ctx.arc(
+            Math.random() * rect.width,
+            Math.random() * rect.height,
+            Math.random() * 1.4 + .2,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fill();
+
+    }
+
+    ctx.textAlign = "center";
+
+    ctx.fillStyle = "#FFF8E9";
+
+    ctx.font = 'italic 38px "Allura", cursive';
+
+    ctx.fillText(
+        "Scratch",
+        rect.width / 2,
+        rect.height / 2 - 3
+    );
+
+    ctx.font = '8px "Cinzel", serif';
+
+    ctx.fillText(
+        "TO REVEAL",
+        rect.width / 2,
+        rect.height / 2 + 23
+    );
+
+}
+
+function scratch(e) {
+
+    if (!scratching || revealed) return;
+
+    const rect = canvas.getBoundingClientRect();
+
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    ctx.globalCompositeOperation = "destination-out";
+
+    ctx.beginPath();
+
+    ctx.arc(x, y, 25, 0, Math.PI * 2);
+
+    ctx.fill();
+
+    const now = Date.now();
+
+    if (now - lastCheck > 350) {
+
+        lastCheck = now;
+
+        checkScratchProgress();
+
+    }
+
+}
+
+function checkScratchProgress() {
+
+    if (revealed) return;
+
+    const imageData = ctx.getImageData(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+    const pixels = imageData.data;
+
+    let transparent = 0;
+    let total = 0;
+
+    for (let i = 3; i < pixels.length; i += 16) {
+
+        total++;
+
+        if (pixels[i] < 50) {
+            transparent++;
+        }
+
+    }
+
+    const progress = transparent / total;
+
+    if (progress >= 0.42) {
+
+        revealEverything();
+
+    }
+
+}
+
+/* =========================================
+   REVEAL NAMES + COUNTDOWN
+========================================= */
+
+function revealEverything() {
+
+    if (revealed) return;
+
+    revealed = true;
+
+    namePanel.classList.add("revealed");
+
+    countdownWrapper.classList.add("visible");
+
+    requestAnimationFrame(function() {
+
+        requestAnimationFrame(function() {
+
+            countdownWrapper.classList.add("show");
+
+        });
+
+    });
+
+    canvas.style.opacity = "0";
+
+    setTimeout(function() {
+
+        canvas.style.display = "none";
+
+    }, 900);
+
+    startCountdown();
+
+    setTimeout(function() {
+
+        nameSection.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
+
+    }, 500);
+
+}
+
+/* =========================================
+   LIVE COUNTDOWN
+   TARGET: 09 OCTOBER 2026, 3:30 PM IST
+========================================= */
+
+function startCountdown() {
+
+    const targetDate = new Date(
+        "2026-10-09T15:30:00+05:30"
+    ).getTime();
+
+    const daysElement = document.getElementById("days");
+    const hoursElement = document.getElementById("hours");
+    const minutesElement = document.getElementById("minutes");
+    const secondsElement = document.getElementById("seconds");
+
+    const footer = document.getElementById("countdownFooter");
+
+    function updateCountdown() {
+
+        const now = Date.now();
+
+        const distance = targetDate - now;
+
+        if (distance <= 0) {
+
+            daysElement.textContent = "00";
+            hoursElement.textContent = "00";
+            minutesElement.textContent = "00";
+            secondsElement.textContent = "00";
+
+            footer.textContent =
+                "The beautiful beginning is here. ♥";
+
+            clearInterval(countdownInterval);
+
+            return;
+
+        }
+
+        const days = Math.floor(
+            distance / (1000 * 60 * 60 * 24)
+        );
+
+        const hours = Math.floor(
+            (distance % (1000 * 60 * 60 * 24)) /
+            (1000 * 60 * 60)
+        );
+
+        const minutes = Math.floor(
+            (distance % (1000 * 60 * 60)) /
+            (1000 * 60)
+        );
+
+        const seconds = Math.floor(
+            (distance % (1000 * 60)) / 1000
+        );
+
+        daysElement.textContent =
+            String(days).padStart(2, "0");
+
+        hoursElement.textContent =
+            String(hours).padStart(2, "0");
+
+        minutesElement.textContent =
+            String(minutes).padStart(2, "0");
+
+        secondsElement.textContent =
+            String(seconds).padStart(2, "0");
+
+    }
+
+    updateCountdown();
+
+    const countdownInterval = setInterval(
+        updateCountdown,
+        1000
+    );
+
+}
+
+/* =========================================
+   POINTER EVENTS
+========================================= */
+
+canvas.addEventListener("pointerdown", function(e) {
+
+    if (revealed) return;
+
+    scratching = true;
+
+    canvas.setPointerCapture(e.pointerId);
+
+    scratch(e);
+
+});
+
+canvas.addEventListener("pointermove", scratch);
+
+canvas.addEventListener("pointerup", function() {
+
+    scratching = false;
+
+    checkScratchProgress();
+
+});
+
+canvas.addEventListener("pointercancel", function() {
+
+    scratching = false;
+
+});
+
+setupScratch();
+
+window.addEventListener("resize", function() {
+
+    if (!revealed) {
+
+        setupScratch();
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>
