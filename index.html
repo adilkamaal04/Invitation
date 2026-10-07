@@ -1460,7 +1460,7 @@ h2 {
         <button
             class="wax-seal"
             id="openButton"
-            aria-label="Open wedding invitation">
+            aria-label="Open Nikah invitation">
 
             <span class="monogram">
                 T &amp; A
@@ -1468,8 +1468,9 @@ h2 {
 
         </button>
 
+        <!-- CHANGED FROM WEDDING TO NIKAH -->
         <div class="envelope-label">
-            A WEDDING INVITATION
+            A NIKAH INVITATION
         </div>
 
         <div class="tap-text">
@@ -1677,9 +1678,7 @@ h2 {
                 <span
                     class="countdown-number"
                     id="days">
-
                     00
-
                 </span>
 
                 <span class="countdown-label">
@@ -1693,9 +1692,7 @@ h2 {
                 <span
                     class="countdown-number"
                     id="hours">
-
                     00
-
                 </span>
 
                 <span class="countdown-label">
@@ -1709,9 +1706,7 @@ h2 {
                 <span
                     class="countdown-number"
                     id="minutes">
-
                     00
-
                 </span>
 
                 <span class="countdown-label">
@@ -1725,9 +1720,7 @@ h2 {
                 <span
                     class="countdown-number"
                     id="seconds">
-
                     00
-
                 </span>
 
                 <span class="countdown-label">
@@ -1818,7 +1811,6 @@ h2 {
 
         </div>
 
-        <!-- VENUE CARD KEPT -->
         <div class="venue-mini">
 
             <div class="tiny">
@@ -1860,7 +1852,6 @@ h2 {
 
     <div class="divider"></div>
 
-    <!-- VENUE CARD KEPT -->
     <div class="venue-card">
 
         <div class="venue-icon">
@@ -2387,6 +2378,8 @@ function startCountdown() {
             "countdownFooter"
         );
 
+    let countdownInterval;
+
     function updateCountdown() {
 
         const now =
@@ -2499,7 +2492,7 @@ function startCountdown() {
 
     updateCountdown();
 
-    const countdownInterval =
+    countdownInterval =
         setInterval(
             updateCountdown,
             1000
